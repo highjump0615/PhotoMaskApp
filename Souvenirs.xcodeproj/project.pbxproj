@@ -10,6 +10,7 @@
 		C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D71F20230D4A00AACFED /* LaunchScreen.storyboard */; };
 		C346D72420230D4B00AACFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D72120230D4A00AACFED /* Main.storyboard */; };
 		C346D7272023135000AACFED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C346D7262023135000AACFED /* ViewController.swift */; };
+		C383313F20237252007339C1 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C383313E20237252007339C1 /* LandingViewController.swift */; };
 		C39CBE6C2020F84F009BBF02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39CBE6B2020F84F009BBF02 /* AppDelegate.swift */; };
 		C39CBE732020F84F009BBF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C39CBE722020F84F009BBF02 /* Assets.xcassets */; };
 		C39CBE812020F850009BBF02 /* SouvenirsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39CBE802020F850009BBF02 /* SouvenirsTests.swift */; };
@@ -37,6 +38,7 @@
 		C346D72020230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C346D72220230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C346D7262023135000AACFED /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C383313E20237252007339C1 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		C39CBE682020F84F009BBF02 /* Souvenirs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Souvenirs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39CBE6B2020F84F009BBF02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C39CBE722020F84F009BBF02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				C346D7262023135000AACFED /* ViewController.swift */,
+				C383313E20237252007339C1 /* LandingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C346D7272023135000AACFED /* ViewController.swift in Sources */,
+				C383313F20237252007339C1 /* LandingViewController.swift in Sources */,
 				C39CBE6C2020F84F009BBF02 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
