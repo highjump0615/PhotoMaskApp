@@ -20,19 +20,19 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
         //
         var template = Template(name: "Buddha Meme")
         template.imgPathBackground = "budmeme_bg.png"
-        templates.append(template)
+        self.templates.append(template)
         
         template = Template(name: "Dank Weed")
         template.imgPathBackground = "dankweed_bg.png"
-        templates.append(template)
+        self.templates.append(template)
         
         template = Template(name: "Winner Best Stoner 1")
         template.imgPathBackground = "winnerbest1_bg.png"
-        templates.append(template)
+        self.templates.append(template)
         
         template = Template(name: "Winner Best Stoner 2")
         template.imgPathBackground = "winnerbest2_bg.png"
-        templates.append(template)
+        self.templates.append(template)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +55,7 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - CollectionView DataSoruce & Delegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return templates.count
+        return self.templates.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,7 +64,7 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TemplateCellID", for: indexPath) as! TemplateCollectionViewCell
-        cell.mImgViewBg.image = UIImage(named: templates[indexPath.row].imgPathBackground!)
+        cell.mImgViewBg.image = UIImage(named: self.templates[indexPath.row].imgPathBackground!)
         cell.layoutIfNeeded()
         
         return cell
@@ -77,11 +77,9 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        let secondViewController = self.storyboard!.instantiateViewController(withIdentifier: "ShareView") as! ShareViewController
-//        secondViewController.emojiFileName = stickerArray.object(at: (indexPath as NSIndexPath).row) as! NSString
-//
-//        self.navigationController?.pushViewController(secondViewController, animated: true)
-//
+        let mainVC = self.storyboard!.instantiateViewController(withIdentifier: "MainView") as! MainViewController
+        mainVC.template = self.templates[indexPath.row]
+
+        self.navigationController?.pushViewController(mainVC, animated: true)
     }
 }

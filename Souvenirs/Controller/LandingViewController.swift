@@ -16,7 +16,7 @@ class LandingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        mLblTitle.adjustsFontSizeToFitWidth = true
+        self.mLblTitle.adjustsFontSizeToFitWidth = true
     }
 
     override func didReceiveMemoryWarning() {
