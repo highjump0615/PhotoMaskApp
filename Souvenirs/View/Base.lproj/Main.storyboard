@@ -167,7 +167,6 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W15-oY-UyC">
                                 <rect key="frame" x="0.0" y="64" width="320" height="368"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buy-Zo-8cZ">
                                 <rect key="frame" x="0.0" y="432" width="320" height="232"/>
@@ -250,6 +249,7 @@
                     <connections>
                         <outlet property="butSticker" destination="JUf-Eh-Xh9" id="Kjp-cB-Xj7"/>
                         <outlet property="constraintToolbarOffset" destination="G1w-mL-uxI" id="0yr-W2-blD"/>
+                        <outlet property="contentView" destination="UlP-Rs-5kb" id="Ko0-ro-cc0"/>
                         <outlet property="imgViewTemp" destination="W15-oY-UyC" id="t1j-9q-tcl"/>
                     </connections>
                 </viewController>
