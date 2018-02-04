@@ -36,6 +36,9 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         setupViews()
         
+        // Initialize sticker panel
+        showStickerPanel(show: false)
+        
         //
         // Initialize for gesture
         //
@@ -71,11 +74,19 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     @IBAction func onButSticker(_ sender: UIButton) {
         self.butSticker.isSelected = !self.butSticker.isSelected
         
-        if (butSticker.isSelected) {
-            constraintToolbarOffset.constant = -232
+        showStickerPanel(show: butSticker.isSelected)
+    }
+    
+    
+    /// Show/Hide sticker panel
+    ///
+    /// - Parameter show: 
+    func showStickerPanel(show: Bool) {
+        if (show) {
+            self.constraintToolbarOffset.constant = -232
         }
         else {
-            constraintToolbarOffset.constant = -48
+            self.constraintToolbarOffset.constant = -48
         }
     }
     
