@@ -137,6 +137,13 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         self.present(self.picker!, animated: true, completion: nil)
     }
     
+    @IBAction func onButSave(_ sender: Any) {
+        let image = self.contentView.capture()
+        let imageMain = image.crop(rect: self.imgViewTemp.frame)
+        let imageSave = imageMain.crop(rect: self.imgViewTemp.frameForImageInImageViewAspectFit())
+        UIImageWriteToSavedPhotosAlbum(imageSave, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
     // MARK: Image
     func setupViews() {
         self.contentView.insertSubview(firstImageView, at: 0)
@@ -349,6 +356,19 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
                 let stickerView = view as! CHTStickerView
                 stickerView.showEditingHandlers = false
             }
+        }
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your new image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
     }
     

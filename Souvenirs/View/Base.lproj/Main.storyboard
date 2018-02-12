@@ -207,19 +207,32 @@
                                                     <action selector="onButSticker:" destination="cGw-Bu-H97" eventType="touchUpInside" id="BlT-D1-OKB"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLV-mI-km5">
+                                                <rect key="frame" x="136" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="xQQ-tH-mYe"/>
+                                                </constraints>
+                                                <state key="normal" image="Save"/>
+                                                <connections>
+                                                    <action selector="onButSave:" destination="cGw-Bu-H97" eventType="touchUpInside" id="PE9-VZ-Qlp"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.96878832619999999" blue="0.97118890270000002" alpha="0.62356954230281703" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="HWJ-RT-Kvy" firstAttribute="leading" secondItem="s3D-Eh-8Yc" secondAttribute="leading" id="05X-js-Aoa"/>
+                                            <constraint firstItem="CLV-mI-km5" firstAttribute="centerX" secondItem="s3D-Eh-8Yc" secondAttribute="centerX" id="3YN-UB-Gxy"/>
                                             <constraint firstAttribute="trailing" secondItem="JUf-Eh-Xh9" secondAttribute="trailing" id="5ai-re-ubp"/>
                                             <constraint firstAttribute="height" constant="48" id="D2x-GF-LLl"/>
                                             <constraint firstItem="HWJ-RT-Kvy" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="LMq-fm-kQm"/>
                                             <constraint firstItem="JUf-Eh-Xh9" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="TfX-lN-9Om"/>
                                             <constraint firstItem="dez-pk-0qQ" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="acp-Gk-TYY"/>
+                                            <constraint firstItem="CLV-mI-km5" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="atu-Cc-Fr0"/>
                                             <constraint firstAttribute="bottom" secondItem="JUf-Eh-Xh9" secondAttribute="bottom" id="dwK-Qd-E8x"/>
                                             <constraint firstAttribute="bottom" secondItem="HWJ-RT-Kvy" secondAttribute="bottom" id="f27-MK-Hxr"/>
                                             <constraint firstItem="dez-pk-0qQ" firstAttribute="leading" secondItem="HWJ-RT-Kvy" secondAttribute="trailing" id="vha-zJ-Jsm"/>
                                             <constraint firstAttribute="bottom" secondItem="dez-pk-0qQ" secondAttribute="bottom" id="wQK-mv-z8I"/>
+                                            <constraint firstAttribute="bottom" secondItem="CLV-mI-km5" secondAttribute="bottom" id="ywd-lB-yFE"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpY-SJ-CKI" customClass="StickerPanelView" customModule="Souvenirs" customModuleProvider="target">
@@ -504,6 +517,7 @@
         <image name="Camera" width="72" height="72"/>
         <image name="Gallery" width="72" height="72"/>
         <image name="Logo" width="1024" height="1024"/>
+        <image name="Save" width="72" height="72"/>
         <image name="Sticker" width="72" height="72"/>
     </resources>
 </document>

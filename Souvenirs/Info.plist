@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Add photo to front template</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save result to photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Add photo to front template</string>
 	<key>UILaunchStoryboardName</key>
