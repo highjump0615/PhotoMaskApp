@@ -8,10 +8,14 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CHTStickerViewDelegate {
     
     var template: Template?
     var picker : UIImagePickerController?
+    
+    var pinchGesture: UIPinchGestureRecognizer?
+    var rotationGesture: UIRotationGestureRecognizer?
+    var panGesture: UIPanGestureRecognizer?
     
     var firstImageView: DraggableImageView = {
         let iv = DraggableImageView()
@@ -23,6 +27,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     @IBOutlet weak var imgViewTemp: UIImageView!
     @IBOutlet weak var constraintToolbarOffset: NSLayoutConstraint!
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var panelView: UIView!
     
     @IBOutlet weak var butSticker: UIButton!
     
@@ -42,22 +47,48 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         //
         // Initialize for gesture
         //
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch))
-        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotate))
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
+        self.pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch))
+        self.rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotate))
+        self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         
-        pinchGesture.delegate = self
-        rotationGesture.delegate = self
-        panGesture.delegate = self
+        self.pinchGesture?.delegate = self
+        self.rotationGesture?.delegate = self
+        self.panGesture?.delegate = self
+        tapGesture.delegate = self
         
-        contentView.addGestureRecognizer(pinchGesture)
-        contentView.addGestureRecognizer(rotationGesture)
-        contentView.addGestureRecognizer(panGesture)
+        contentView.addGestureRecognizer(self.pinchGesture!)
+        contentView.addGestureRecognizer(self.rotationGesture!)
+        contentView.addGestureRecognizer(self.panGesture!)
+        contentView.addGestureRecognizer(tapGesture)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    /// add sticker to view
+    func addSticker(stickerImage: UIImage) {
+        hideStickerEditFrame()
+        
+        let screenSize = UIScreen.main.bounds.size
+        let imgWidth = screenSize.width / 3
+        let imgHeight = imgWidth * (stickerImage.size.height / stickerImage.size.width)
+        let stickerImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imgWidth, height: imgHeight))
+        stickerImageView.image = stickerImage
+        
+        let stickerView: CHTStickerView = CHTStickerView(contentView: stickerImageView)
+        stickerView.center = CGPoint(x: screenSize.width / 2, y: screenSize.height / 2)
+        stickerView.delegate = self
+        stickerView.outlineBorderColor = UIColor.clear
+        stickerView.setImage(UIImage(named: "StickerClose"), for: .close)
+        stickerView.setImage(UIImage(named: "StickerRotate"), for: .rotate)
+        stickerView.setImage(UIImage(named: "StickerFlip"), for: .flip)
+        stickerView.setHandlerSize(30)
+        stickerView.showEditingHandlers = true
+        self.contentView.insertSubview(stickerView, at: 2)
     }
     
 
@@ -205,12 +236,16 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     
     // MARK: - Gestures
     
+    @IBAction func tap(_ gesture: UITapGestureRecognizer) {
+        hideStickerEditFrame()
+    }
+    
     @IBAction func pan(_ gesture: UIPanGestureRecognizer) {
-        if firstImageView.image == nil {
+        if !isGestureAvailable(gestureRecognizer: gesture) {
             return
         }
         
-        if (gesture.state == .began || gesture.state == .changed) {
+        if gesture.state == .began || gesture.state == .changed {
             
             let translation = gesture.translation(in: self.view)
             let translatedCenter = CGPoint(x: CGFloat(firstImageView.center.x + translation.x), y: firstImageView.center.y + translation.y)
@@ -224,6 +259,10 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     
     @IBAction func rotate(_ gesture: UIRotationGestureRecognizer) {
+        if !isGestureAvailable(gestureRecognizer: gesture) {
+            return
+        }
+        
         firstImageView.transform = firstImageView.transform.rotated(by: gesture.rotation)
         gesture.rotation = 0
         
@@ -231,7 +270,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     
     @IBAction func pinch(_ gesture: UIPinchGestureRecognizer) {
-        if firstImageView.image == nil {
+        if !isGestureAvailable(gestureRecognizer: gesture) {
             return
         }
         
@@ -241,10 +280,43 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         makeImageTransparentGesture(state: gesture.state)
     }
     
+    /// check gesture availability for main image
+    ///
+    /// - Parameter gestureRecognizer: <#gestureRecognizer description#>
+    /// - Returns: <#return value description#>
+    func isGestureAvailable(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // if image is not loaded, return
+        if firstImageView.image == nil {
+            return false
+        }
+
+        return true
+    }
+    
+    // MARK: - UIGestureRecognizerDelegate
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view is CHTStickerView {
+            hideStickerEditFrame()
+            
+            // show edit frame
+            let stickerView = touch.view as! CHTStickerView
+            stickerView.showEditingHandlers = true
+            
+            return false
+        }
+        if touch.view!.isDescendant(of: self.panelView) {
+            return false
+        }
+
+        return true
+    }
+    
+    // MARK: - Public Methods
     
     /// Make template image view transparent
     ///
@@ -256,6 +328,8 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         else if state == .ended {
             makeImageTransparent(transparent: false)
         }
+        
+        hideStickerEditFrame()
     }
     
     func makeImageTransparent(transparent: Bool) {
@@ -264,6 +338,17 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         }
         else {
             self.imgViewTemp.alpha = 1
+        }
+    }
+
+    
+    /// Remove edit frame for stickers
+    func hideStickerEditFrame() {
+        for view in self.contentView.subviews {
+            if (view is CHTStickerView) {
+                let stickerView = view as! CHTStickerView
+                stickerView.showEditingHandlers = false
+            }
         }
     }
     

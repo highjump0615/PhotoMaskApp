@@ -142,5 +142,10 @@ class StickerPanelView: UIView, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mainVC = self.parentViewController as! MainViewController
+        let strImgName = self.categories[self.currentCategoryIndex].name + String(indexPath.row) + ".png"
+        let imgSticker = UIImage(named: strImgName)
+        
+        mainVC.addSticker(stickerImage: imgSticker!)
     }
 }

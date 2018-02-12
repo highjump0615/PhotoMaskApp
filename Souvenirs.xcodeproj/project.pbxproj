@@ -64,7 +64,7 @@
 		C303021F20263852007079AC /* Swag8.png in Resources */ = {isa = PBXBuildFile; fileRef = C30301E720263851007079AC /* Swag8.png */; };
 		C303022020263852007079AC /* Swag9.png in Resources */ = {isa = PBXBuildFile; fileRef = C30301E820263851007079AC /* Swag9.png */; };
 		C3030222202639D2007079AC /* StickerPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3030221202639D2007079AC /* StickerPanelView.swift */; };
-		C303022520264795007079AC /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = C303022420264795007079AC /* UIView+Border.swift */; };
+		C303022520264795007079AC /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C303022420264795007079AC /* UIViewExtension.swift */; };
 		C3030227202656A1007079AC /* StickerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3030226202656A1007079AC /* StickerCategory.swift */; };
 		C329A5AB2024553B006CE55B /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5AA2024553B006CE55B /* SelectViewController.swift */; };
 		C329A5AE20245C5E006CE55B /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5AD20245C5E006CE55B /* Template.swift */; };
@@ -82,6 +82,7 @@
 		C39CBE732020F84F009BBF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C39CBE722020F84F009BBF02 /* Assets.xcassets */; };
 		C39CBE812020F850009BBF02 /* SouvenirsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39CBE802020F850009BBF02 /* SouvenirsTests.swift */; };
 		C39CBE8C2020F850009BBF02 /* SouvenirsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39CBE8B2020F850009BBF02 /* SouvenirsUITests.swift */; };
+		C3AC9E6C202F88A800C4B7CF /* CHTStickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3AC9E6B202F88A800C4B7CF /* CHTStickerView.m */; };
 		C3C3602C20275412005A5442 /* StickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3602B20275412005A5442 /* StickerCollectionViewCell.swift */; };
 		C3C3603120276292005A5442 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3603020276292005A5442 /* UIImageViewExtension.swift */; };
 /* End PBXBuildFile section */
@@ -161,7 +162,7 @@
 		C30301E720263851007079AC /* Swag8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Swag8.png; sourceTree = "<group>"; };
 		C30301E820263851007079AC /* Swag9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Swag9.png; sourceTree = "<group>"; };
 		C3030221202639D2007079AC /* StickerPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPanelView.swift; sourceTree = "<group>"; };
-		C303022420264795007079AC /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		C303022420264795007079AC /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		C3030226202656A1007079AC /* StickerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCategory.swift; sourceTree = "<group>"; };
 		C329A5AA2024553B006CE55B /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		C329A5AD20245C5E006CE55B /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
@@ -185,6 +186,8 @@
 		C39CBE872020F850009BBF02 /* SouvenirsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SouvenirsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39CBE8B2020F850009BBF02 /* SouvenirsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SouvenirsUITests.swift; sourceTree = "<group>"; };
 		C39CBE8D2020F850009BBF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3AC9E6A202F88A800C4B7CF /* CHTStickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTStickerView.h; sourceTree = "<group>"; };
+		C3AC9E6B202F88A800C4B7CF /* CHTStickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTStickerView.m; sourceTree = "<group>"; };
 		C3C3602B20275412005A5442 /* StickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3C3603020276292005A5442 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -329,7 +332,7 @@
 		C3030223202645A2007079AC /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				C303022420264795007079AC /* UIView+Border.swift */,
+				C303022420264795007079AC /* UIViewExtension.swift */,
 				C3C3603020276292005A5442 /* UIImageViewExtension.swift */,
 			);
 			path = CustomView;
@@ -434,6 +437,7 @@
 		C39CBE6A2020F84F009BBF02 /* Souvenirs */ = {
 			isa = PBXGroup;
 			children = (
+				C3AC9E68202F87DA00C4B7CF /* Lib */,
 				C329A5AF20245FE1006CE55B /* Resource */,
 				C329A5AC202459FF006CE55B /* Model */,
 				C346D7252023135000AACFED /* Controller */,
@@ -461,6 +465,23 @@
 				C39CBE8D2020F850009BBF02 /* Info.plist */,
 			);
 			path = SouvenirsUITests;
+			sourceTree = "<group>";
+		};
+		C3AC9E68202F87DA00C4B7CF /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				C3AC9E69202F88A800C4B7CF /* StickerView */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		C3AC9E69202F88A800C4B7CF /* StickerView */ = {
+			isa = PBXGroup;
+			children = (
+				C3AC9E6A202F88A800C4B7CF /* CHTStickerView.h */,
+				C3AC9E6B202F88A800C4B7CF /* CHTStickerView.m */,
+			);
+			path = StickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -660,13 +681,14 @@
 				C329A5AE20245C5E006CE55B /* Template.swift in Sources */,
 				C3030222202639D2007079AC /* StickerPanelView.swift in Sources */,
 				C3C3603120276292005A5442 /* UIImageViewExtension.swift in Sources */,
-				C303022520264795007079AC /* UIView+Border.swift in Sources */,
+				C303022520264795007079AC /* UIViewExtension.swift in Sources */,
 				C329A5AB2024553B006CE55B /* SelectViewController.swift in Sources */,
 				C383313F20237252007339C1 /* LandingViewController.swift in Sources */,
 				C329A5C22025027C006CE55B /* DraggableImageView.swift in Sources */,
 				C329A5BE2024C95C006CE55B /* MainViewController.swift in Sources */,
 				C3030227202656A1007079AC /* StickerCategory.swift in Sources */,
 				C3C3602C20275412005A5442 /* StickerCollectionViewCell.swift in Sources */,
+				C3AC9E6C202F88A800C4B7CF /* CHTStickerView.m in Sources */,
 				C329A5BC20246842006CE55B /* TemplateCollectionViewCell.swift in Sources */,
 				C39CBE6C2020F84F009BBF02 /* AppDelegate.swift in Sources */,
 			);
@@ -840,6 +862,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.minh.souvenirs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Souvenirs/Lib/StickerView/CHTStickerView.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -855,6 +878,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.minh.souvenirs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Souvenirs/Lib/StickerView/CHTStickerView.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -313,6 +313,7 @@
                         <outlet property="constraintToolbarOffset" destination="G1w-mL-uxI" id="0yr-W2-blD"/>
                         <outlet property="contentView" destination="UlP-Rs-5kb" id="Ko0-ro-cc0"/>
                         <outlet property="imgViewTemp" destination="W15-oY-UyC" id="t1j-9q-tcl"/>
+                        <outlet property="panelView" destination="buy-Zo-8cZ" id="nmY-0n-mFs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99O-dO-rhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
