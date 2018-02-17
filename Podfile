@@ -6,6 +6,9 @@ target 'Souvenirs' do
   use_frameworks!
 
   # Pods for Souvenirs
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'SVProgressHUD'
 
   target 'SouvenirsTests' do
     inherit! :search_paths

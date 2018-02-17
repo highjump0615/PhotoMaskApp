@@ -12,11 +12,23 @@ class LandingViewController: UIViewController {
 
     @IBOutlet weak var mLblTitle: UILabel!
     
+    @IBOutlet weak var butStart: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.mLblTitle.adjustsFontSizeToFitWidth = true
+        
+        // check acvitation status
+        let deviceId = UIDevice.current.identifierForVendor?.uuidString
+        
+        let userInfo = User.ref.child(User.TableName).child(deviceId!).queryLimited(toFirst: 1)
+        userInfo.observe(.value) { snapshot in
+            if snapshot.childrenCount > 0 {
+                self.butStart.isEnabled = true
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

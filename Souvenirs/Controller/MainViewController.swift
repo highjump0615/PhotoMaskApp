@@ -17,13 +17,9 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     var rotationGesture: UIRotationGestureRecognizer?
     var panGesture: UIPanGestureRecognizer?
     
-    var firstImageView: DraggableImageView = {
-        let iv = DraggableImageView()
-        iv.backgroundColor = .white
-        iv.isUserInteractionEnabled = true
-        return iv
-    }()
+    var firstImageView: DraggableImageView?
     
+    @IBOutlet weak var viewWork: UIView!
     @IBOutlet weak var imgViewTemp: UIImageView!
     @IBOutlet weak var constraintToolbarOffset: NSLayoutConstraint!
     @IBOutlet var contentView: UIView!
@@ -38,8 +34,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         self.picker = UIImagePickerController()
         self.picker?.delegate = self
-        
-        setupViews()
         
         // Initialize sticker panel
         showStickerPanel(show: false)
@@ -68,6 +62,11 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupViews()
+    }
     
     /// add sticker to view
     func addSticker(stickerImage: UIImage) {
@@ -88,7 +87,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         stickerView.setImage(UIImage(named: "StickerFlip"), for: .flip)
         stickerView.setHandlerSize(30)
         stickerView.showEditingHandlers = true
-        self.contentView.insertSubview(stickerView, at: 2)
+        self.viewWork.insertSubview(stickerView, at: 2)
     }
     
 
@@ -138,7 +137,10 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     
     @IBAction func onButSave(_ sender: Any) {
-        let image = self.contentView.capture()
+        // hide edit frmaes before save
+        hideStickerEditFrame()
+        
+        let image = self.viewWork.capture()
         let imageMain = image.crop(rect: self.imgViewTemp.frame)
         let imageSave = imageMain.crop(rect: self.imgViewTemp.frameForImageInImageViewAspectFit())
         UIImageWriteToSavedPhotosAlbum(imageSave, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -146,18 +148,35 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     
     // MARK: Image
     func setupViews() {
-        self.contentView.insertSubview(firstImageView, at: 0)
+        if self.firstImageView != nil {
+            return
+        }
         
-        let firstImageWidth = self.view.frame.size.width / 2
+        self.firstImageView = {
+            let iv = DraggableImageView()
+            iv.backgroundColor = .white
+            iv.isUserInteractionEnabled = true
+            return iv
+        }()
+        
+        print("\(self.viewWork.frame.minX), \(self.viewWork.frame.minY), \(self.viewWork.frame.maxX), \(self.viewWork.frame.maxY)")
+        
+        self.viewWork.insertSubview(self.firstImageView!, at: 0)
+        
+        let firstImageWidth = self.viewWork.frame.size.width / 1.5
 
-        firstImageView.frame = CGRect(x: view.frame.midX - firstImageWidth / 2, y: view.frame.midY - firstImageWidth / 2, width: firstImageWidth, height: firstImageWidth)
+        print("\(self.viewWork.frame.midX), \(self.viewWork.frame.midY)")
+        self.firstImageView!.frame = CGRect(x: self.viewWork.frame.width / 2 - firstImageWidth / 2,
+                                            y: self.viewWork.frame.height / 2 - firstImageWidth / 2,
+                                            width: firstImageWidth,
+                                            height: firstImageWidth)
     }
     
     // MARK: - Image Picker Process
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.firstImageView.image  = sFunc_imageFixOrientation(img: chosenImage)
-        self.firstImageView.contentMode = .scaleAspectFill
+        self.firstImageView!.image  = sFunc_imageFixOrientation(img: chosenImage)
+        self.firstImageView!.contentMode = .scaleAspectFill
         dismiss(animated: true, completion: nil)
         
         // Make template semi-transparent
@@ -255,9 +274,9 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         if gesture.state == .began || gesture.state == .changed {
             
             let translation = gesture.translation(in: self.view)
-            let translatedCenter = CGPoint(x: CGFloat(firstImageView.center.x + translation.x), y: firstImageView.center.y + translation.y)
+            let translatedCenter = CGPoint(x: CGFloat(firstImageView!.center.x + translation.x), y: firstImageView!.center.y + translation.y)
 
-            firstImageView.center = translatedCenter
+            firstImageView!.center = translatedCenter
             
             gesture.setTranslation(CGPoint.zero, in: firstImageView)
         }
@@ -270,7 +289,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             return
         }
         
-        firstImageView.transform = firstImageView.transform.rotated(by: gesture.rotation)
+        firstImageView!.transform = firstImageView!.transform.rotated(by: gesture.rotation)
         gesture.rotation = 0
         
         makeImageTransparentGesture(state: gesture.state)
@@ -281,7 +300,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             return
         }
         
-        firstImageView.transform = firstImageView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+        firstImageView!.transform = firstImageView!.transform.scaledBy(x: gesture.scale, y: gesture.scale)
         gesture.scale = 1
         
         makeImageTransparentGesture(state: gesture.state)
@@ -293,7 +312,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     /// - Returns: <#return value description#>
     func isGestureAvailable(gestureRecognizer: UIGestureRecognizer) -> Bool {
         // if image is not loaded, return
-        if firstImageView.image == nil {
+        if firstImageView!.image == nil {
             return false
         }
 
@@ -351,7 +370,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     
     /// Remove edit frame for stickers
     func hideStickerEditFrame() {
-        for view in self.contentView.subviews {
+        for view in self.viewWork.subviews {
             if (view is CHTStickerView) {
                 let stickerView = view as! CHTStickerView
                 stickerView.showEditingHandlers = false

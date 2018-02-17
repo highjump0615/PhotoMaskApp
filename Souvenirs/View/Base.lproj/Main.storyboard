@@ -35,7 +35,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMv-VR-dWq">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMv-VR-dWq">
                                 <rect key="frame" x="32" y="326" width="256" height="48"/>
                                 <color key="backgroundColor" red="1" green="0.9687883261769189" blue="0.97118890266356406" alpha="0.75635453345070425" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -47,7 +47,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="fHj-jX-UM1" kind="show" id="azB-WY-F3q"/>
+                                    <segue destination="brn-fe-Iec" kind="show" id="azB-WY-F3q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myi-eT-oPV">
@@ -84,6 +84,7 @@
                     <navigationItem key="navigationItem" id="Mp8-23-kYA"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="butStart" destination="DMv-VR-dWq" id="Hxg-3g-ize"/>
                         <outlet property="mLblTitle" destination="axy-Q1-v7Y" id="q9I-tY-A63"/>
                     </connections>
                 </viewController>
@@ -148,6 +149,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rp5-kS-wDR"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Select Template" id="vjf-Pp-7GF"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="cGw-Bu-H97" kind="show" identifier="Select2Main" id="Hgx-BF-1mL"/>
@@ -155,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGI-V9-v5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.25" y="110"/>
+            <point key="canvasLocation" x="2128" y="110"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="HCl-aL-fPU">
@@ -165,9 +167,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W15-oY-UyC">
-                                <rect key="frame" x="0.0" y="64" width="320" height="368"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-Y8-9zL">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W15-oY-UyC">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="W15-oY-UyC" firstAttribute="top" secondItem="oUc-Y8-9zL" secondAttribute="top" id="Jcr-GR-lfE"/>
+                                    <constraint firstItem="W15-oY-UyC" firstAttribute="leading" secondItem="oUc-Y8-9zL" secondAttribute="leading" id="ORS-IM-yeq"/>
+                                    <constraint firstAttribute="bottom" secondItem="W15-oY-UyC" secondAttribute="bottom" constant="48" id="cTA-Dg-oce"/>
+                                    <constraint firstAttribute="trailing" secondItem="W15-oY-UyC" secondAttribute="trailing" id="wjV-iT-x7b"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buy-Zo-8cZ">
                                 <rect key="frame" x="0.0" y="248" width="320" height="232"/>
                                 <subviews>
@@ -309,13 +322,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.08235294118" green="0.63137254899999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="W15-oY-UyC" firstAttribute="trailing" secondItem="I3i-E6-br5" secondAttribute="trailing" id="Dkc-C8-t5d"/>
+                            <constraint firstItem="oUc-Y8-9zL" firstAttribute="leading" secondItem="I3i-E6-br5" secondAttribute="leading" id="CsX-Is-Faz"/>
                             <constraint firstItem="buy-Zo-8cZ" firstAttribute="top" secondItem="I3i-E6-br5" secondAttribute="bottom" constant="-232" id="G1w-mL-uxI"/>
+                            <constraint firstItem="I3i-E6-br5" firstAttribute="bottom" secondItem="oUc-Y8-9zL" secondAttribute="bottom" id="Ka4-pb-cj5"/>
                             <constraint firstItem="buy-Zo-8cZ" firstAttribute="leading" secondItem="I3i-E6-br5" secondAttribute="leading" id="Mq0-89-NKu"/>
                             <constraint firstItem="buy-Zo-8cZ" firstAttribute="trailing" secondItem="I3i-E6-br5" secondAttribute="trailing" id="Spa-yp-bww"/>
-                            <constraint firstItem="W15-oY-UyC" firstAttribute="top" secondItem="I3i-E6-br5" secondAttribute="top" id="fNh-us-3oa"/>
-                            <constraint firstItem="W15-oY-UyC" firstAttribute="leading" secondItem="I3i-E6-br5" secondAttribute="leading" id="heJ-SE-VX8"/>
-                            <constraint firstItem="I3i-E6-br5" firstAttribute="bottom" secondItem="W15-oY-UyC" secondAttribute="bottom" constant="48" id="s9a-oM-jJh"/>
+                            <constraint firstItem="I3i-E6-br5" firstAttribute="trailing" secondItem="oUc-Y8-9zL" secondAttribute="trailing" id="ddf-0d-XMe"/>
+                            <constraint firstItem="oUc-Y8-9zL" firstAttribute="top" secondItem="I3i-E6-br5" secondAttribute="top" id="qbb-r4-BXc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I3i-E6-br5"/>
                     </view>
@@ -327,16 +340,17 @@
                         <outlet property="contentView" destination="UlP-Rs-5kb" id="Ko0-ro-cc0"/>
                         <outlet property="imgViewTemp" destination="W15-oY-UyC" id="t1j-9q-tcl"/>
                         <outlet property="panelView" destination="buy-Zo-8cZ" id="nmY-0n-mFs"/>
+                        <outlet property="viewWork" destination="oUc-Y8-9zL" id="rvU-f2-LuN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99O-dO-rhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193.75" y="110"/>
+            <point key="canvasLocation" x="2925" y="110"/>
         </scene>
         <!--Activation-->
         <scene sceneID="mou-d4-Z5m">
             <objects>
-                <viewController title="Activation" id="z5w-AI-gsa" sceneMemberID="viewController">
+                <viewController title="Activation" id="z5w-AI-gsa" customClass="ActivationViewController" customModule="Souvenirs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y9t-Aw-HrP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -358,10 +372,13 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         </variation>
+                                        <connections>
+                                            <outlet property="delegate" destination="z5w-AI-gsa" id="J6U-kg-iib"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -387,10 +404,13 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         </variation>
+                                        <connections>
+                                            <outlet property="delegate" destination="z5w-AI-gsa" id="jm9-XR-Pb9"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -415,10 +435,13 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         </variation>
+                                        <connections>
+                                            <outlet property="delegate" destination="z5w-AI-gsa" id="Zki-me-WCI"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -443,10 +466,13 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done" textContentType="tel"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                         </variation>
+                                        <connections>
+                                            <outlet property="delegate" destination="z5w-AI-gsa" id="XBw-5d-nu5"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -462,6 +488,9 @@
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 </variation>
+                                <connections>
+                                    <action selector="onButActivate:" destination="z5w-AI-gsa" eventType="touchUpInside" id="7j2-UY-kES"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.08235294118" green="0.63137254899999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -489,10 +518,17 @@
                         <viewLayoutGuide key="safeArea" id="KeL-uN-T6t"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="editEmail" destination="ZMm-qw-zTs" id="MAf-y9-cIL"/>
+                        <outlet property="editName" destination="EYO-fz-Upc" id="2rc-IE-iIU"/>
+                        <outlet property="editPhone" destination="c9F-bf-waE" id="Our-xR-f4x"/>
+                        <outlet property="editStoreName" destination="oyB-nG-PpT" id="Ri4-lx-KfV"/>
+                        <segue destination="brn-fe-Iec" kind="show" identifier="Activate2Select" id="hia-I0-QJc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcI-YX-aiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="667.5" y="945"/>
+            <point key="canvasLocation" x="514" y="945"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iD9-rT-Dzv">
@@ -512,6 +548,24 @@
             </objects>
             <point key="canvasLocation" x="-233" y="110"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vCh-XO-g1s">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="brn-fe-Iec" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ohJ-4D-rCv">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fHj-jX-UM1" kind="relationship" relationship="rootViewController" id="LL1-Cn-qRe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="54b-6F-RBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1376.25" y="110"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Camera" width="72" height="72"/>
@@ -520,4 +574,7 @@
         <image name="Save" width="72" height="72"/>
         <image name="Sticker" width="72" height="72"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="azB-WY-F3q"/>
+    </inferredMetricsTieBreakers>
 </document>

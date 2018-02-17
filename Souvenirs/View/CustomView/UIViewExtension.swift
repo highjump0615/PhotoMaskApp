@@ -22,7 +22,7 @@ extension UIView {
         let border = CALayer()
         border.backgroundColor = color
 
-        print("\(frame.minX), \(frame.minY), \(frame.maxX), \(frame.maxY)")
+//        print("\(frame.minX), \(frame.minY), \(frame.maxX), \(frame.maxY)")
         
         switch side {
         case .Left: border.frame = CGRect(x: frame.minX, y: frame.minY, width: thickness, height: frame.height); break

@@ -33,6 +33,8 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
         template = Template(name: "Winner Best Stoner 2")
         template.imgPathBackground = "winnerbest2_bg.png"
         self.templates.append(template)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
