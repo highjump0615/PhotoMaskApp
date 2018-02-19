@@ -78,6 +78,11 @@
 		C329A5BC20246842006CE55B /* TemplateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5BB20246842006CE55B /* TemplateCollectionViewCell.swift */; };
 		C329A5BE2024C95C006CE55B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5BD2024C95C006CE55B /* MainViewController.swift */; };
 		C329A5C22025027C006CE55B /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5C12025027C006CE55B /* DraggableImageView.swift */; };
+		C3381672203B6ADF00490E7A /* losfa_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166D203B6ADE00490E7A /* losfa_thumb.png */; };
+		C3381673203B6ADF00490E7A /* wanted_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166E203B6ADE00490E7A /* wanted_bg.png */; };
+		C3381674203B6ADF00490E7A /* losag_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166F203B6ADF00490E7A /* losag_bg.png */; };
+		C3381675203B6ADF00490E7A /* losfa_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C3381670203B6ADF00490E7A /* losfa_bg.png */; };
+		C3381676203B6ADF00490E7A /* losag_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C3381671203B6ADF00490E7A /* losag_thumb.png */; };
 		C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D71F20230D4A00AACFED /* LaunchScreen.storyboard */; };
 		C346D72420230D4B00AACFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D72120230D4A00AACFED /* Main.storyboard */; };
 		C366DCFD20382E1400AB3334 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366DCFC20382E1400AB3334 /* Common.swift */; };
@@ -183,6 +188,11 @@
 		C329A5BB20246842006CE55B /* TemplateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C329A5BD2024C95C006CE55B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C329A5C12025027C006CE55B /* DraggableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableImageView.swift; sourceTree = "<group>"; };
+		C338166D203B6ADE00490E7A /* losfa_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losfa_thumb.png; sourceTree = "<group>"; };
+		C338166E203B6ADE00490E7A /* wanted_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wanted_bg.png; sourceTree = "<group>"; };
+		C338166F203B6ADF00490E7A /* losag_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losag_bg.png; sourceTree = "<group>"; };
+		C3381670203B6ADF00490E7A /* losfa_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losfa_bg.png; sourceTree = "<group>"; };
+		C3381671203B6ADF00490E7A /* losag_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losag_thumb.png; sourceTree = "<group>"; };
 		C346D72020230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C346D72220230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C366DCFC20382E1400AB3334 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -414,6 +424,11 @@
 		C329A5B120245FF9006CE55B /* Template */ = {
 			isa = PBXGroup;
 			children = (
+				C338166F203B6ADF00490E7A /* losag_bg.png */,
+				C3381671203B6ADF00490E7A /* losag_thumb.png */,
+				C3381670203B6ADF00490E7A /* losfa_bg.png */,
+				C338166D203B6ADE00490E7A /* losfa_thumb.png */,
+				C338166E203B6ADE00490E7A /* wanted_bg.png */,
 				C329A5B320246411006CE55B /* budmeme_bg.png */,
 				C329A5B520246411006CE55B /* dankweed_bg.png */,
 				C329A5B420246411006CE55B /* winnerbest1_bg.png */,
@@ -665,6 +680,7 @@
 				C30301FC20263852007079AC /* Glass13.png in Resources */,
 				C303021220263852007079AC /* Swag1.png in Resources */,
 				C329A5B920246412006CE55B /* dankweed_bg.png in Resources */,
+				C3381672203B6ADF00490E7A /* losfa_thumb.png in Resources */,
 				C303020B20263852007079AC /* Mustasch2.png in Resources */,
 				C30301F820263851007079AC /* Glass1.png in Resources */,
 				C30301F520263851007079AC /* BEARD8.png in Resources */,
@@ -683,6 +699,7 @@
 				C303020120263852007079AC /* Glass2.png in Resources */,
 				C303020620263852007079AC /* Glass7.png in Resources */,
 				C30301F720263851007079AC /* Glass0.png in Resources */,
+				C3381675203B6ADF00490E7A /* losfa_bg.png in Resources */,
 				C329A5B620246412006CE55B /* winnerbest2_bg.png in Resources */,
 				C303020F20263852007079AC /* Mustasch6.png in Resources */,
 				C303020E20263852007079AC /* Mustasch5.png in Resources */,
@@ -690,7 +707,9 @@
 				C30301EE20263851007079AC /* BEARD1.png in Resources */,
 				C346D72420230D4B00AACFED /* Main.storyboard in Resources */,
 				C303020420263852007079AC /* Glass5.png in Resources */,
+				C3381673203B6ADF00490E7A /* wanted_bg.png in Resources */,
 				C30301F620263851007079AC /* BEARD9.png in Resources */,
+				C3381674203B6ADF00490E7A /* losag_bg.png in Resources */,
 				C30301FD20263852007079AC /* Glass14.png in Resources */,
 				C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */,
 				C303020A20263852007079AC /* Mustasch1.png in Resources */,
@@ -710,6 +729,7 @@
 				C303020C20263852007079AC /* Mustasch3.png in Resources */,
 				C329A5B720246412006CE55B /* budmeme_bg.png in Resources */,
 				C30301ED20263851007079AC /* BEARD0.png in Resources */,
+				C3381676203B6ADF00490E7A /* losag_thumb.png in Resources */,
 				C303021B20263852007079AC /* Swag4.png in Resources */,
 				C303021620263852007079AC /* Swag13.png in Resources */,
 				C30301F120263851007079AC /* BEARD4.png in Resources */,

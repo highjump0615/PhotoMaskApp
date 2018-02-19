@@ -34,7 +34,19 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
         template.imgPathBackground = "winnerbest2_bg.png"
         self.templates.append(template)
         
+        template = Template(name: "Los Angeles 1")
+        template.imgPathBackground = "losag_bg.png"
+        template.imgPathThumb = "losag_thumb.png"
+        self.templates.append(template)
         
+        template = Template(name: "Los Angeles 2")
+        template.imgPathBackground = "losfa_bg.png"
+        template.imgPathThumb = "losfa_thumb.png"
+        self.templates.append(template)
+        
+        template = Template(name: "Smoking")
+        template.imgPathBackground = "wanted_bg"
+        self.templates.append(template)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +78,7 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TemplateCellID", for: indexPath) as! TemplateCollectionViewCell
-        cell.mImgViewBg.image = UIImage(named: self.templates[indexPath.row].imgPathBackground!)
+        cell.mImgViewBg.image = UIImage(named: self.templates[indexPath.row].thumbnail())
         cell.layoutIfNeeded()
         
         return cell
