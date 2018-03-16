@@ -326,6 +326,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // touched sticker view, cancel this gesture
         if touch.view is CHTStickerView {
             hideStickerEditFrame()
             
@@ -335,10 +336,12 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             
             return false
         }
+        // touched unnecessary view, cancel this gesture
         if touch.view!.isDescendant(of: self.panelView) {
             return false
         }
 
+        // allow this gesture
         return true
     }
     
