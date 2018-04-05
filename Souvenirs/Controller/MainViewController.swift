@@ -121,7 +121,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     
     @IBAction func onButCamera(_ sender: Any) {
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+        if UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             picker?.sourceType = UIImagePickerControllerSourceType.camera
             self.present(picker!, animated: true, completion: nil)
         } else {

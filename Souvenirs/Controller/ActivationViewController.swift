@@ -100,6 +100,10 @@ class ActivationViewController: UIViewController, UITextFieldDelegate {
             }
             // sucess
             else {
+                // save activate flag
+                let defaluts = UserDefaults.standard
+                defaluts.set(true, forKey: Common.KEY_ACTIVATION)
+                
                 self.performSegue(withIdentifier: "Activate2Select", sender: nil)
             }
         })
