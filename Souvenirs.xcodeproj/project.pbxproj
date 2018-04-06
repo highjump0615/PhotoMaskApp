@@ -83,8 +83,16 @@
 		C3381674203B6ADF00490E7A /* losag_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166F203B6ADF00490E7A /* losag_bg.png */; };
 		C3381675203B6ADF00490E7A /* losfa_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C3381670203B6ADF00490E7A /* losfa_bg.png */; };
 		C3381676203B6ADF00490E7A /* losag_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C3381671203B6ADF00490E7A /* losag_thumb.png */; };
+		C3448C96207780D200DDC0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3448C95207780D200DDC0F5 /* CoreGraphics.framework */; };
 		C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D71F20230D4A00AACFED /* LaunchScreen.storyboard */; };
 		C346D72420230D4B00AACFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D72120230D4A00AACFED /* Main.storyboard */; };
+		C352F5A12077F07C0014714B /* Framework in Resources */ = {isa = PBXBuildFile; fileRef = C352F5A02077F07C0014714B /* Framework */; };
+		C352F5A32077F09B0014714B /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A22077F09A0014714B /* opencv2.framework */; };
+		C352F5A52077FD850014714B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A42077FD850014714B /* Accelerate.framework */; };
+		C352F5A72077FD920014714B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A62077FD910014714B /* AssetsLibrary.framework */; };
+		C352F5A92077FD9C0014714B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A82077FD9C0014714B /* CoreMedia.framework */; };
+		C352F5AB2077FDA80014714B /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5AA2077FDA80014714B /* CoreImage.framework */; };
+		C352F5AD2077FDBE0014714B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5AC2077FDBE0014714B /* AVFoundation.framework */; };
 		C366DCFF2038327A00AB3334 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366DCFE2038327A00AB3334 /* User.swift */; };
 		C366DD012038348400AB3334 /* ActivationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366DD002038348400AB3334 /* ActivationViewController.swift */; };
 		C3733DFF2038058600398C6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3733DFE2038058500398C6C /* GoogleService-Info.plist */; };
@@ -194,8 +202,17 @@
 		C338166F203B6ADF00490E7A /* losag_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losag_bg.png; sourceTree = "<group>"; };
 		C3381670203B6ADF00490E7A /* losfa_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losfa_bg.png; sourceTree = "<group>"; };
 		C3381671203B6ADF00490E7A /* losag_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losag_thumb.png; sourceTree = "<group>"; };
+		C3448C8520777D0200DDC0F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		C3448C95207780D200DDC0F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C346D72020230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C346D72220230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C352F5A02077F07C0014714B /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Framework; sourceTree = "<group>"; };
+		C352F5A22077F09A0014714B /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Framework/opencv2.framework; sourceTree = "<group>"; };
+		C352F5A42077FD850014714B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		C352F5A62077FD910014714B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		C352F5A82077FD9C0014714B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C352F5AA2077FDA80014714B /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		C352F5AC2077FDBE0014714B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C366DCFE2038327A00AB3334 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C366DD002038348400AB3334 /* ActivationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationViewController.swift; sourceTree = "<group>"; };
 		C3733DFE2038058500398C6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -229,6 +246,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C352F5AD2077FDBE0014714B /* AVFoundation.framework in Frameworks */,
+				C352F5AB2077FDA80014714B /* CoreImage.framework in Frameworks */,
+				C352F5A92077FD9C0014714B /* CoreMedia.framework in Frameworks */,
+				C352F5A72077FD920014714B /* AssetsLibrary.framework in Frameworks */,
+				C352F5A52077FD850014714B /* Accelerate.framework in Frameworks */,
+				C352F5A32077F09B0014714B /* opencv2.framework in Frameworks */,
+				C3448C96207780D200DDC0F5 /* CoreGraphics.framework in Frameworks */,
 				5D5BBA737767A48DBA498154 /* Pods_Souvenirs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,6 +279,13 @@
 		631AEB83E92FA9BEA1AC20F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C352F5AC2077FDBE0014714B /* AVFoundation.framework */,
+				C352F5AA2077FDA80014714B /* CoreImage.framework */,
+				C352F5A82077FD9C0014714B /* CoreMedia.framework */,
+				C352F5A62077FD910014714B /* AssetsLibrary.framework */,
+				C352F5A42077FD850014714B /* Accelerate.framework */,
+				C352F5A22077F09A0014714B /* opencv2.framework */,
+				C3448C95207780D200DDC0F5 /* CoreGraphics.framework */,
 				8292B5E17F849977DB4F66EE /* Pods_Souvenirs.framework */,
 				A024D1ED12E574F87145E16E /* Pods_SouvenirsTests.framework */,
 				D4380C2694FAA6DE6907190F /* Pods_SouvenirsUITests.framework */,
@@ -455,6 +486,14 @@
 			path = DraggableImageView;
 			sourceTree = "<group>";
 		};
+		C3448C8420777C1800DDC0F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C3448C8520777D0200DDC0F5 /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		C346D71E20230D4A00AACFED /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +522,7 @@
 		C39CBE5F2020F84F009BBF02 = {
 			isa = PBXGroup;
 			children = (
+				C352F5A02077F07C0014714B /* Framework */,
 				C39CBE6A2020F84F009BBF02 /* Souvenirs */,
 				C39CBE7F2020F850009BBF02 /* SouvenirsTests */,
 				C39CBE8A2020F850009BBF02 /* SouvenirsUITests */,
@@ -511,6 +551,7 @@
 				C329A5AC202459FF006CE55B /* Model */,
 				C346D7252023135000AACFED /* Controller */,
 				C346D71E20230D4A00AACFED /* View */,
+				C3448C8420777C1800DDC0F5 /* Supporting Files */,
 				C39CBE6B2020F84F009BBF02 /* AppDelegate.swift */,
 				C39CBE722020F84F009BBF02 /* Assets.xcassets */,
 				C39CBE772020F84F009BBF02 /* Info.plist */,
@@ -719,6 +760,7 @@
 				C346D72420230D4B00AACFED /* Main.storyboard in Resources */,
 				C303020420263852007079AC /* Glass5.png in Resources */,
 				C3381673203B6ADF00490E7A /* wanted_bg.png in Resources */,
+				C352F5A12077F07C0014714B /* Framework in Resources */,
 				C30301F620263851007079AC /* BEARD9.png in Resources */,
 				C3381674203B6ADF00490E7A /* losag_bg.png in Resources */,
 				C30301FD20263852007079AC /* Glass14.png in Resources */,
@@ -1112,6 +1154,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWW2NS32JN;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Souvenirs/PrefixHeader.pch;
 				INFOPLIST_FILE = Souvenirs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.minh.souvenirs;
@@ -1129,6 +1177,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWW2NS32JN;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Framework",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Souvenirs/PrefixHeader.pch;
 				INFOPLIST_FILE = Souvenirs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.minh.souvenirs;

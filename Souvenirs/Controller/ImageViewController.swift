@@ -22,7 +22,7 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     let DRAW_NONE = 0
     let DRAW_FOREGROUND = 1
     let DRAW_BACKGROUND = 2
-    var drawMode: Int
+    var drawMode: Int = 0
     
     // draw parameters
     var lastPoint: CGPoint!
