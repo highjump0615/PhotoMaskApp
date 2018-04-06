@@ -97,6 +97,7 @@
 		C3C3602C20275412005A5442 /* StickerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3602B20275412005A5442 /* StickerCollectionViewCell.swift */; };
 		C3C3603120276292005A5442 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3603020276292005A5442 /* UIImageViewExtension.swift */; };
 		C3D61C042076BE890007299A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D61C032076BE890007299A /* Common.swift */; };
+		C3D61C062076CD360007299A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D61C052076CD360007299A /* ImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +215,7 @@
 		C3C3602B20275412005A5442 /* StickerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3C3603020276292005A5442 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		C3D61C032076BE890007299A /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		C3D61C052076CD360007299A /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		C565C68F7C2D98404FEA2EF6 /* Pods-SouvenirsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SouvenirsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SouvenirsUITests/Pods-SouvenirsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4380C2694FAA6DE6907190F /* Pods_SouvenirsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SouvenirsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A02C7749461B7C050B972F /* Pods-SouvenirsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SouvenirsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SouvenirsTests/Pods-SouvenirsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				C329A5AA2024553B006CE55B /* SelectViewController.swift */,
 				C329A5BD2024C95C006CE55B /* MainViewController.swift */,
 				C366DD002038348400AB3334 /* ActivationViewController.swift */,
+				C3D61C052076CD360007299A /* ImageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				C3D61C042076BE890007299A /* Common.swift in Sources */,
 				C329A5AE20245C5E006CE55B /* Template.swift in Sources */,
 				C3030222202639D2007079AC /* StickerPanelView.swift in Sources */,
+				C3D61C062076CD360007299A /* ImageViewController.swift in Sources */,
 				C3C3603120276292005A5442 /* UIImageViewExtension.swift in Sources */,
 				C303022520264795007079AC /* UIViewExtension.swift in Sources */,
 				C329A5AB2024553B006CE55B /* SelectViewController.swift in Sources */,

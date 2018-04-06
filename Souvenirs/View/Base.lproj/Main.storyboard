@@ -347,6 +347,123 @@
             </objects>
             <point key="canvasLocation" x="2925" y="110"/>
         </scene>
+        <!--Image View Controller-->
+        <scene sceneID="wOH-Ia-Ylc">
+            <objects>
+                <viewController storyboardIdentifier="ImageView" id="yTx-6k-aav" customClass="ImageViewController" customModule="Souvenirs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pYm-LM-oQY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldm-ut-YI3" userLabel="Tool bar">
+                                <rect key="frame" x="0.0" y="388" width="320" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUT-im-9fg">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="Mgz-lu-fhg"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="Face">
+                                            <color key="titleColor" red="1" green="1" blue="0.97118890270000002" alpha="0.62356954229999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onButExtractFace:" destination="yTx-6k-aav" eventType="touchUpInside" id="L7Q-Ra-bOz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSU-0C-eld">
+                                        <rect key="frame" x="224" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="Tt1-6h-Aef"/>
+                                        </constraints>
+                                        <state key="normal" image="DrawPen"/>
+                                        <connections>
+                                            <action selector="onButDrawForeground:" destination="yTx-6k-aav" eventType="touchUpInside" id="CdL-00-0SI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84T-G0-0ih">
+                                        <rect key="frame" x="176" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="alF-tM-xdk"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="0.011367673219999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="DrawPen"/>
+                                        <connections>
+                                            <action selector="onButDrawForeground:" destination="yTx-6k-aav" eventType="touchUpInside" id="mtd-AQ-ZRB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjf-xB-SE8">
+                                        <rect key="frame" x="272" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="a7U-aX-CcQ"/>
+                                        </constraints>
+                                        <state key="normal" image="Redraw"/>
+                                        <connections>
+                                            <action selector="onButDrawForeground:" destination="yTx-6k-aav" eventType="touchUpInside" id="ON0-HR-5h7"/>
+                                            <action selector="onButRedraw:" destination="yTx-6k-aav" eventType="touchUpInside" id="AnR-J1-C2s"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.95864450524120315" green="0.96010767487046633" blue="0.93454974598082796" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="84T-G0-0ih" firstAttribute="centerY" secondItem="vSU-0C-eld" secondAttribute="centerY" id="0Bb-BH-DYh"/>
+                                    <constraint firstAttribute="bottom" secondItem="vjf-xB-SE8" secondAttribute="bottom" id="0wc-hc-BfY"/>
+                                    <constraint firstAttribute="height" constant="48" id="2NJ-sx-9jI"/>
+                                    <constraint firstItem="84T-G0-0ih" firstAttribute="height" secondItem="vSU-0C-eld" secondAttribute="height" id="6oU-hX-w21"/>
+                                    <constraint firstItem="vSU-0C-eld" firstAttribute="top" secondItem="Ldm-ut-YI3" secondAttribute="top" id="8nY-6g-V3p"/>
+                                    <constraint firstItem="mUT-im-9fg" firstAttribute="top" secondItem="Ldm-ut-YI3" secondAttribute="top" id="JVJ-99-geS"/>
+                                    <constraint firstAttribute="trailing" secondItem="vjf-xB-SE8" secondAttribute="trailing" id="Ku8-vy-WcF"/>
+                                    <constraint firstAttribute="bottom" secondItem="mUT-im-9fg" secondAttribute="bottom" id="L35-Gg-Jji"/>
+                                    <constraint firstAttribute="bottom" secondItem="vSU-0C-eld" secondAttribute="bottom" id="NLR-0D-fcA"/>
+                                    <constraint firstItem="vSU-0C-eld" firstAttribute="leading" secondItem="84T-G0-0ih" secondAttribute="trailing" id="R9n-1b-MFs"/>
+                                    <constraint firstItem="vjf-xB-SE8" firstAttribute="leading" secondItem="vSU-0C-eld" secondAttribute="trailing" id="bBz-8M-Ajb"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="cbH-j1-bR2"/>
+                                    <constraint firstItem="mUT-im-9fg" firstAttribute="leading" secondItem="Ldm-ut-YI3" secondAttribute="leading" id="is4-kQ-j5b"/>
+                                    <constraint firstItem="vjf-xB-SE8" firstAttribute="top" secondItem="Ldm-ut-YI3" secondAttribute="top" id="rrk-6W-ApF"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uJY-Pf-rkI">
+                                <rect key="frame" x="0.0" y="64" width="320" height="324"/>
+                            </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B3m-qC-UYp">
+                                <rect key="frame" x="0.0" y="66" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="B3m-qC-UYp" secondAttribute="height" id="asj-em-di8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9586445052" green="0.96010767490000004" blue="0.93454974599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="uJY-Pf-rkI" firstAttribute="leading" secondItem="Rmt-bK-tZt" secondAttribute="leading" id="BP4-eX-8Ml"/>
+                            <constraint firstItem="B3m-qC-UYp" firstAttribute="centerY" secondItem="uJY-Pf-rkI" secondAttribute="centerY" id="DCt-Rq-7n2"/>
+                            <constraint firstItem="Ldm-ut-YI3" firstAttribute="bottom" secondItem="Rmt-bK-tZt" secondAttribute="bottom" id="DvW-0J-phn"/>
+                            <constraint firstItem="Ldm-ut-YI3" firstAttribute="trailing" secondItem="Rmt-bK-tZt" secondAttribute="trailing" id="IWY-9S-BwH"/>
+                            <constraint firstItem="uJY-Pf-rkI" firstAttribute="trailing" secondItem="Rmt-bK-tZt" secondAttribute="trailing" id="J5d-vV-fao"/>
+                            <constraint firstItem="B3m-qC-UYp" firstAttribute="centerX" secondItem="uJY-Pf-rkI" secondAttribute="centerX" id="PKl-yJ-l9m"/>
+                            <constraint firstItem="Ldm-ut-YI3" firstAttribute="top" secondItem="uJY-Pf-rkI" secondAttribute="bottom" id="k0R-2k-bAh"/>
+                            <constraint firstItem="uJY-Pf-rkI" firstAttribute="top" secondItem="Rmt-bK-tZt" secondAttribute="top" id="lYK-m6-V6O"/>
+                            <constraint firstItem="B3m-qC-UYp" firstAttribute="width" secondItem="uJY-Pf-rkI" secondAttribute="width" id="nrP-V3-MYn"/>
+                            <constraint firstItem="Ldm-ut-YI3" firstAttribute="leading" secondItem="Rmt-bK-tZt" secondAttribute="leading" id="oRw-ip-p7j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Rmt-bK-tZt"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Done" id="rVU-WI-W4H"/>
+                    </toolbarItems>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="butItemDone" destination="rVU-WI-W4H" id="I8l-Qu-VpQ"/>
+                        <outlet property="butPenBackground" destination="vSU-0C-eld" id="bQE-h5-Kk7"/>
+                        <outlet property="butPenForeground" destination="84T-G0-0ih" id="73c-UA-URb"/>
+                        <outlet property="imgViewDraw" destination="B3m-qC-UYp" id="cax-e7-Fue"/>
+                        <outlet property="imgViewMain" destination="uJY-Pf-rkI" id="KzW-9v-FNg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yJY-ld-Ykg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3735" y="102.5"/>
+        </scene>
         <!--Activation-->
         <scene sceneID="mou-d4-Z5m">
             <objects>
@@ -569,8 +686,11 @@
     </scenes>
     <resources>
         <image name="Camera" width="72" height="72"/>
+        <image name="DrawPen" width="72" height="72"/>
+        <image name="Face" width="72" height="72"/>
         <image name="Gallery" width="72" height="72"/>
         <image name="Logo" width="1024" height="1024"/>
+        <image name="Redraw" width="72" height="72"/>
         <image name="Save" width="72" height="72"/>
         <image name="Sticker" width="72" height="72"/>
     </resources>

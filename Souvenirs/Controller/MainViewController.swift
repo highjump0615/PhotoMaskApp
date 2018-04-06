@@ -175,12 +175,18 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     // MARK: - Image Picker Process
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.firstImageView!.image  = sFunc_imageFixOrientation(img: chosenImage)
-        self.firstImageView!.contentMode = .scaleAspectFill
-        dismiss(animated: true, completion: nil)
         
-        // Make template semi-transparent
-        makeImageTransparent(transparent: true)
+        // go to image process page
+        let imageVC = self.storyboard!.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
+        imageVC.imgMain = chosenImage        
+        self.navigationController?.pushViewController(imageVC, animated: true)
+//        
+//        self.firstImageView!.image  = sFunc_imageFixOrientation(img: chosenImage)
+//        self.firstImageView!.contentMode = .scaleAspectFill
+        dismiss(animated: true, completion: nil)
+//
+//        // Make template semi-transparent
+//        makeImageTransparent(transparent: true)
     }
     
     func sFunc_imageFixOrientation(img:UIImage) -> UIImage {
