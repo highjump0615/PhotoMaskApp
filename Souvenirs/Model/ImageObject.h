@@ -15,8 +15,11 @@
     CGSize mainSize;
 }
 
+@property (nonatomic) BOOL detectedFace;
+
 - (id)initWithImage: (UIImage *)img;
 - (UIImage *) process;
+- (void) pushPoints: (NSArray *)points isBackground:(BOOL) bBg;
 
 + (void)initializeFaceDetect: (NSString *)resourcePath;
 

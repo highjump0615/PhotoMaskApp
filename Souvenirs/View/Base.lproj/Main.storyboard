@@ -478,6 +478,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="butExtractFace" destination="mUT-im-9fg" id="rFT-a5-dQM"/>
                         <outlet property="butItemDone" destination="rVU-WI-W4H" id="I8l-Qu-VpQ"/>
                         <outlet property="butPenBackground" destination="vSU-0C-eld" id="bQE-h5-Kk7"/>
                         <outlet property="butPenForeground" destination="84T-G0-0ih" id="73c-UA-URb"/>

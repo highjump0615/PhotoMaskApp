@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CHTStickerViewDelegate {
+class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CHTStickerViewDelegate, HumanImageDelegate {
     
     var template: Template?
     var picker : UIImagePickerController?
@@ -178,15 +178,11 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         // go to image process page
         let imageVC = self.storyboard!.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
-        imageVC.imgMain = chosenImage        
+        imageVC.imgMain = chosenImage
+        imageVC.delegate = self
         self.navigationController?.pushViewController(imageVC, animated: true)
-//        
-//        self.firstImageView!.image  = sFunc_imageFixOrientation(img: chosenImage)
-//        self.firstImageView!.contentMode = .scaleAspectFill
+
         dismiss(animated: true, completion: nil)
-//
-//        // Make template semi-transparent
-//        makeImageTransparent(transparent: true)
     }
     
     func sFunc_imageFixOrientation(img:UIImage) -> UIImage {
@@ -375,7 +371,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             self.imgViewTemp.alpha = 1
         }
     }
-
     
     /// Remove edit frame for stickers
     func hideStickerEditFrame() {
@@ -399,5 +394,15 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             present(ac, animated: true)
         }
     }
-    
+
+    // MARK: - HumanImageDelegate
+    func setImageExtracted(img: UIImage) {
+        self.firstImageView!.image  = sFunc_imageFixOrientation(img: img)
+        self.firstImageView!.contentMode = .scaleAspectFill
+
+        // Make template semi-transparent
+        makeImageTransparent(transparent: true)
+        
+        self.firstImageView?.backgroundColor = UIColor.clear
+    }
 }

@@ -9,13 +9,19 @@
 import UIKit
 import SVProgressHUD
 
+protocol HumanImageDelegate {
+    func setImageExtracted(img: UIImage)
+}
+
 class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var imgMain: UIImage?
+    var delegate: HumanImageDelegate?
     
     /// opencv image object
     var imgObjFace: ImageObject!
     
+    @IBOutlet weak var butExtractFace: UIButton!
     @IBOutlet weak var imgViewDraw: UIImageView!
     @IBOutlet weak var imgViewMain: UIImageView!
     @IBOutlet weak var butItemDone: UIBarButtonItem!
@@ -29,24 +35,28 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     let DRAW_NONE = 0
     let DRAW_FOREGROUND = 1
     let DRAW_BACKGROUND = 2
-    let DRAW_DONE = 3
+    
+    var pointsFg : [CGPoint] = []
+    var pointsBg : [CGPoint] = []
     
     var drawMode: Int = 0 {
         didSet {
-            lblNotice.text = "Extract human shape if needed"
-            butPenBackground.isSelected = false
-            butPenForeground.isSelected = false
+            self.lblNotice.text = "Extract human shape if needed"
+            self.butPenBackground.isSelected = false
+            self.butPenForeground.isSelected = false
             
-            if drawMode == DRAW_BACKGROUND {
-                butPenBackground.isSelected = true
-                lblNotice.text = "Draw background area with finger"
+            if self.drawMode == self.DRAW_BACKGROUND {
+                self.butPenBackground.isSelected = true
+                self.lblNotice.text = "Draw background area with finger"
             }
-            else if drawMode == DRAW_FOREGROUND {
-                butPenForeground.isSelected = true
-                lblNotice.text = "Draw foreground area with finger"
+            else if self.drawMode == self.DRAW_FOREGROUND {
+                self.butPenForeground.isSelected = true
+                self.lblNotice.text = "Draw foreground area with finger"
             }
-            else if drawMode == DRAW_DONE {
-                lblNotice.text = "Extract done! You can use this image or improve extraction with drawing again"
+            else {
+                if (self.extractDone) {
+                    self.lblNotice.text = "Extract done! You can use this image or improve extraction with drawing again"
+                }
             }
         }
     }
@@ -58,8 +68,6 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        drawMode = DRAW_NONE
         
         // right buttons
         self.navigationItem.rightBarButtonItem = butItemDone
@@ -73,11 +81,22 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
         imgViewDraw.addGestureRecognizer(panGesture)
         
         // init face image
+        SVProgressHUD.show(withStatus: "Initializing image data...")
         DispatchQueue.global(qos: .background).async {
             let bundle = Bundle(for: type(of: self))
             ImageObject.initializeFaceDetect(bundle.bundlePath)
             
             self.imgObjFace = ImageObject.init(image: self.imgMain)
+            
+            // not detected face
+            DispatchQueue.main.async {
+                if !self.imgObjFace.detectedFace {
+                    self.lblNotice.text = "No face detected"
+                    self.butExtractFace.isEnabled = false
+                }
+            
+                SVProgressHUD.dismiss()
+            }
         }
         
         enableDrawButtons(enable: false)
@@ -99,12 +118,20 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBAction func pan(_ gesture: UIPanGestureRecognizer) {
         
-        if drawMode == DRAW_NONE || drawMode == DRAW_DONE {
+        if drawMode == DRAW_NONE {
             return
         }
         
         let position = gesture.location(in: self.imgViewDraw)
-        print("\(gesture.state): \(position.x), \(position.y)")
+        let pointDraw = CGPoint(x: position.x / imgViewDraw.frame.size.width * 400,
+                                y: position.y / imgViewDraw.frame.size.height * 400)
+        
+        if drawMode == DRAW_FOREGROUND {
+            pointsFg.append(pointDraw)
+        }
+        else if drawMode == DRAW_BACKGROUND {
+            pointsBg.append(pointDraw)
+        }
         
         if gesture.state == .changed {
             
@@ -155,6 +182,8 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
         SVProgressHUD.show(withStatus: "Extracting human shape...")
         
         // push points
+        imgObjFace.pushPoints(pointsFg, isBackground: false)
+        imgObjFace.pushPoints(pointsBg, isBackground: true)
         
         // process extracting face
         DispatchQueue.global(qos: .background).async {
@@ -172,11 +201,21 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
                 else {
                     self.drawMode = self.DRAW_BACKGROUND
                 }
+                
+                self.clearDrawImage()
             }
         }
     }
     
+    
+    /// pass image to parent view
+    ///
+    /// - Parameter sender: <#sender description#>
     @IBAction func onButDone(_ sender: Any) {
+        delegate?.setImageExtracted(img: imgViewMain.image!)
+        
+        // back to previous
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onButDrawForeground(_ sender: Any) {
@@ -193,7 +232,16 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func onButRedraw(_ sender: Any) {
         drawMode = DRAW_NONE
         
+        clearDrawImage()
+    }
+
+    /// clear drawn lines
+    func clearDrawImage() {
         imgViewDraw.image = nil
+
+        // clear points
+        self.pointsFg.removeAll()
+        self.pointsBg.removeAll()
     }
     
 }

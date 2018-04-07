@@ -9,6 +9,7 @@
 #import "ImageObject.h"
 #import "ImageHelper.h"
 #import "MainProc.h"
+#import <vector>
 
 @implementation ImageObject
 
@@ -23,13 +24,29 @@
     mainSize = img.size;
     mainBitmap = [ImageHelper convertUIImagetoBitmapRGB8:img];
     
-    InitImage(mainBitmap, mainSize.width, mainSize.height);
+    int nRes = InitImage(mainBitmap, mainSize.width, mainSize.height);
+    self.detectedFace = nRes >= 0;
     
     return self;
 }
 
-- (void) pushPints: (NSArray *)points {
+- (void) pushPoints: (NSArray *)points isBackground:(BOOL) bBg {
+    cv::Point pt;
+    vector<cv::Point> aryPoint;
     
+    if (points.count == 0) {
+        return;
+    }
+    
+    for (int i = 0; i < points.count; i++) {
+        CGPoint point = [points[i] CGPointValue];
+        
+        pt.x = (int)point.x;
+        pt.y = (int)point.y;
+        aryPoint.push_back(pt);
+    }
+    
+    PushPoints(aryPoint, bBg);
 }
 
 - (UIImage *) process {
