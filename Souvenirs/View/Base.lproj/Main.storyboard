@@ -347,10 +347,10 @@
             </objects>
             <point key="canvasLocation" x="2925" y="110"/>
         </scene>
-        <!--Image View Controller-->
+        <!--Extract Face-->
         <scene sceneID="wOH-Ia-Ylc">
             <objects>
-                <viewController storyboardIdentifier="ImageView" id="yTx-6k-aav" customClass="ImageViewController" customModule="Souvenirs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageView" title="Extract Face" id="yTx-6k-aav" customClass="ImageViewController" customModule="Souvenirs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pYm-LM-oQY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -431,6 +431,24 @@
                                     <constraint firstAttribute="width" secondItem="B3m-qC-UYp" secondAttribute="height" id="asj-em-di8"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BeP-CY-T8n">
+                                <rect key="frame" x="0.0" y="64" width="320" height="33"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Extract human shape if needed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbb-6I-VVq">
+                                        <rect key="frame" x="8" y="8" width="304" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.08235294118" green="0.63137254899999995" blue="0.97254901959999995" alpha="0.69550506161971826" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Hbb-6I-VVq" secondAttribute="bottom" constant="8" id="2l1-ne-Fc4"/>
+                                    <constraint firstItem="Hbb-6I-VVq" firstAttribute="top" secondItem="BeP-CY-T8n" secondAttribute="top" constant="8" id="9hs-ma-Yu2"/>
+                                    <constraint firstItem="Hbb-6I-VVq" firstAttribute="leading" secondItem="BeP-CY-T8n" secondAttribute="leading" constant="8" id="Kaa-Ch-Rzt"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hbb-6I-VVq" secondAttribute="trailing" constant="8" id="zIo-Xw-Jfz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.9586445052" green="0.96010767490000004" blue="0.93454974599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -440,15 +458,22 @@
                             <constraint firstItem="Ldm-ut-YI3" firstAttribute="trailing" secondItem="Rmt-bK-tZt" secondAttribute="trailing" id="IWY-9S-BwH"/>
                             <constraint firstItem="uJY-Pf-rkI" firstAttribute="trailing" secondItem="Rmt-bK-tZt" secondAttribute="trailing" id="J5d-vV-fao"/>
                             <constraint firstItem="B3m-qC-UYp" firstAttribute="centerX" secondItem="uJY-Pf-rkI" secondAttribute="centerX" id="PKl-yJ-l9m"/>
+                            <constraint firstItem="BeP-CY-T8n" firstAttribute="top" secondItem="Rmt-bK-tZt" secondAttribute="top" id="R4o-lC-PN0"/>
+                            <constraint firstItem="BeP-CY-T8n" firstAttribute="trailing" secondItem="Rmt-bK-tZt" secondAttribute="trailing" id="Zz5-rp-L2V"/>
                             <constraint firstItem="Ldm-ut-YI3" firstAttribute="top" secondItem="uJY-Pf-rkI" secondAttribute="bottom" id="k0R-2k-bAh"/>
                             <constraint firstItem="uJY-Pf-rkI" firstAttribute="top" secondItem="Rmt-bK-tZt" secondAttribute="top" id="lYK-m6-V6O"/>
                             <constraint firstItem="B3m-qC-UYp" firstAttribute="width" secondItem="uJY-Pf-rkI" secondAttribute="width" id="nrP-V3-MYn"/>
                             <constraint firstItem="Ldm-ut-YI3" firstAttribute="leading" secondItem="Rmt-bK-tZt" secondAttribute="leading" id="oRw-ip-p7j"/>
+                            <constraint firstItem="BeP-CY-T8n" firstAttribute="leading" secondItem="Rmt-bK-tZt" secondAttribute="leading" id="xBX-VW-hHv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rmt-bK-tZt"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Done" id="rVU-WI-W4H"/>
+                        <barButtonItem title="Done" id="rVU-WI-W4H">
+                            <connections>
+                                <action selector="onButDone:" destination="yTx-6k-aav" id="8Qo-Vh-tuT"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -456,8 +481,10 @@
                         <outlet property="butItemDone" destination="rVU-WI-W4H" id="I8l-Qu-VpQ"/>
                         <outlet property="butPenBackground" destination="vSU-0C-eld" id="bQE-h5-Kk7"/>
                         <outlet property="butPenForeground" destination="84T-G0-0ih" id="73c-UA-URb"/>
+                        <outlet property="butPenRedraw" destination="vjf-xB-SE8" id="3Ux-Vg-ifF"/>
                         <outlet property="imgViewDraw" destination="B3m-qC-UYp" id="cax-e7-Fue"/>
                         <outlet property="imgViewMain" destination="uJY-Pf-rkI" id="KzW-9v-FNg"/>
+                        <outlet property="lblNotice" destination="Hbb-6I-VVq" id="ium-IF-f5i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJY-ld-Ykg" userLabel="First Responder" sceneMemberID="firstResponder"/>
