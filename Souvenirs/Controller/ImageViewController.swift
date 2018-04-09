@@ -41,7 +41,7 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var drawMode: Int = 0 {
         didSet {
-            self.lblNotice.text = "Extract human shape if needed"
+            self.lblNotice.text = "Extract face area if needed"
             self.butPenBackground.isSelected = false
             self.butPenForeground.isSelected = false
             
@@ -179,7 +179,7 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     */
     
     @IBAction func onButExtractFace(_ sender: Any) {
-        SVProgressHUD.show(withStatus: "Extracting human shape...")
+        SVProgressHUD.show(withStatus: "Extracting face area...")
         
         // push points
         imgObjFace.pushPoints(pointsFg, isBackground: false)

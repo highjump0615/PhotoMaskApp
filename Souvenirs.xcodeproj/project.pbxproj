@@ -86,7 +86,6 @@
 		C3448C96207780D200DDC0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3448C95207780D200DDC0F5 /* CoreGraphics.framework */; };
 		C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D71F20230D4A00AACFED /* LaunchScreen.storyboard */; };
 		C346D72420230D4B00AACFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D72120230D4A00AACFED /* Main.storyboard */; };
-		C352F5A12077F07C0014714B /* Framework in Resources */ = {isa = PBXBuildFile; fileRef = C352F5A02077F07C0014714B /* Framework */; };
 		C352F5A32077F09B0014714B /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A22077F09A0014714B /* opencv2.framework */; };
 		C352F5A52077FD850014714B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A42077FD850014714B /* Accelerate.framework */; };
 		C352F5A72077FD920014714B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A62077FD910014714B /* AssetsLibrary.framework */; };
@@ -239,6 +238,7 @@
 		C3448C95207780D200DDC0F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C346D72020230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C346D72220230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C34F2B9120799E3300443B66 /* SSE2NEON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSE2NEON.h; sourceTree = "<group>"; };
 		C352F5A02077F07C0014714B /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Framework; sourceTree = "<group>"; };
 		C352F5A22077F09A0014714B /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Framework/opencv2.framework; sourceTree = "<group>"; };
 		C352F5A42077FD850014714B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -599,6 +599,7 @@
 		C352F5B0207809FC0014714B /* imagemat */ = {
 			isa = PBXGroup;
 			children = (
+				C34F2B9120799E3300443B66 /* SSE2NEON.h */,
 				C352F5B1207809FC0014714B /* Calc.cpp */,
 				C352F5B2207809FC0014714B /* Calc.h */,
 				C352F5B3207809FC0014714B /* cvblob.cpp */,
@@ -907,7 +908,6 @@
 				C303020420263852007079AC /* Glass5.png in Resources */,
 				C3381673203B6ADF00490E7A /* wanted_bg.png in Resources */,
 				C352F5EE207809FC0014714B /* rcpr_38_pn_4_flt_10.mem in Resources */,
-				C352F5A12077F07C0014714B /* Framework in Resources */,
 				C30301F620263851007079AC /* BEARD9.png in Resources */,
 				C352F5E6207809FC0014714B /* 2_Step_1_3.dat in Resources */,
 				C3381674203B6ADF00490E7A /* losag_bg.png in Resources */,
@@ -1318,6 +1318,7 @@
 			baseConfigurationReference = A8B7DF3FD9A4B3DEA6CC6465 /* Pods-Souvenirs.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWW2NS32JN;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1341,6 +1342,7 @@
 			baseConfigurationReference = FC581FF7B4F4DE90E6BD832C /* Pods-Souvenirs.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_X86_VECTOR_INSTRUCTIONS = default;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWW2NS32JN;
 				FRAMEWORK_SEARCH_PATHS = (

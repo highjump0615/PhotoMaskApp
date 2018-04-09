@@ -1929,7 +1929,7 @@ void sprsax(float sa[], unsigned long ija[], float x[], float b[], unsigned long
 }
 #define USING_MMX TRUE
 #if USING_MMX == TRUE
-#include "emmintrin.h"
+//#include "emmintrin.h"
 #endif
 void dsprsax(double sa[], unsigned long ija[], double x[], double b[], unsigned long n)
 {

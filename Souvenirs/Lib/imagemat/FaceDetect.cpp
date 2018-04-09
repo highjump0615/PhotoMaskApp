@@ -2,6 +2,11 @@
 #include "FaceDetect.h"
 #include <math.h>
 
+#if (__i386__ || __x86_64__)
+#include "emmintrin.h"
+#else
+#include "SSE2NEON.h"
+#endif
 
 char g_pbyOrgImg[MAX_IMG_SIZE];
 int g_nOrgWidth;
