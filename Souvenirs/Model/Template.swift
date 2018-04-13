@@ -12,6 +12,8 @@ class Template {
     var imgPathBackground: String?
     var imgPathThumb: String?
     
+    var rectContent: CGRect?
+    
     init(name: String) {
         self.name = name
     }

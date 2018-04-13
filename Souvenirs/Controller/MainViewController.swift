@@ -180,6 +180,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         self.firstImageView = {
             let iv = DraggableImageView()
             iv.isUserInteractionEnabled = true
+            iv.contentMode = .scaleAspectFit
             return iv
         }()
         
@@ -187,13 +188,15 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         self.viewWork.insertSubview(self.firstImageView!, at: 0)
         
-        let firstImageWidth = self.viewWork.frame.size.width / 1.5
-
-        print("\(self.viewWork.frame.midX), \(self.viewWork.frame.midY)")
-        self.firstImageView!.frame = CGRect(x: self.viewWork.frame.width / 2 - firstImageWidth / 2,
-                                            y: self.viewWork.frame.height / 2 - firstImageWidth / 2,
-                                            width: firstImageWidth,
-                                            height: firstImageWidth)
+        let originX = template!.rectContent!.origin.x * self.viewWork.frame.size.width
+        let originY = rtImgWorkArea!.origin.y + template!.rectContent!.origin.y * rtImgWorkArea!.height
+        let width = template!.rectContent!.width * self.viewWork.frame.size.width
+        let height = template!.rectContent!.height * rtImgWorkArea!.height
+        
+        self.firstImageView!.frame = CGRect(x: originX,
+                                            y: originY,
+                                            width: width,
+                                            height: height)
     }
     
     // MARK: - Image Picker Process

@@ -20,32 +20,60 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
         //
         var template = Template(name: "Buddha Meme")
         template.imgPathBackground = "budmeme_bg.png"
+        template.rectContent = CGRect(x: 672 / 1440.0,
+                                      y: 312 / 1440.0,
+                                      width: 160 / 1440.0,
+                                      height: 182 / 1440.0)
         self.templates.append(template)
         
         template = Template(name: "Dank Weed")
         template.imgPathBackground = "dankweed_bg.png"
+        template.rectContent = CGRect(x: 531 / 1440.0,
+                                      y: 486 / 1440.0,
+                                      width: 210 / 1440.0,
+                                      height: 191 / 1440.0)
         self.templates.append(template)
         
         template = Template(name: "Winner Best Stoner 1")
         template.imgPathBackground = "winnerbest1_bg.png"
+        template.rectContent = CGRect(x: 295 / 1111.0,
+                                      y: 299 / 1111.0,
+                                      width: 515 / 1111.0,
+                                      height: 521 / 1111.0)
         self.templates.append(template)
         
         template = Template(name: "Winner Best Stoner 2")
         template.imgPathBackground = "winnerbest2_bg.png"
+        template.rectContent = CGRect(x: 295 / 1111.0,
+                                      y: 299 / 1111.0,
+                                      width: 515 / 1111.0,
+                                      height: 521 / 1111.0)
         self.templates.append(template)
         
         template = Template(name: "Los Angeles 1")
         template.imgPathBackground = "losag_bg.png"
         template.imgPathThumb = "losag_thumb.png"
+        template.rectContent = CGRect(x: 467 / 2971.0,
+                                      y: 1306 / 4309.0,
+                                      width: 2061 / 2971.0,
+                                      height: 2071 / 4309.0)
         self.templates.append(template)
         
         template = Template(name: "Los Angeles 2")
         template.imgPathBackground = "losfa_bg.png"
         template.imgPathThumb = "losfa_thumb.png"
+        template.rectContent = CGRect(x: 467 / 2971.0,
+                                      y: 1306 / 4309.0,
+                                      width: 2061 / 2971.0,
+                                      height: 2071 / 4309.0)
         self.templates.append(template)
         
         template = Template(name: "Smoking")
         template.imgPathBackground = "wanted_bg"
+        template.rectContent = CGRect(x: 124 / 612.0,
+                                      y: 237 / 792.0,
+                                      width: 367 / 612.0,
+                                      height: 367 / 792.0)
         self.templates.append(template)
     }
 
