@@ -162,7 +162,6 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
         ctx?.strokePath()
         
         self.imgViewDraw.image = UIGraphicsGetImageFromCurrentImageContext()
-//        self.imgViewDraw.alpha = 1
         
         UIGraphicsEndImageContext()
         

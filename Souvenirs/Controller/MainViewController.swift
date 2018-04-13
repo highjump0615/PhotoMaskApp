@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     var rotationGesture: UIRotationGestureRecognizer?
     var panGesture: UIPanGestureRecognizer?
     
+    var rtImgWorkArea: CGRect?
     var firstImageView: DraggableImageView?
     
     @IBOutlet weak var viewWork: UIView!
@@ -30,7 +31,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
+        initTemplateImage()
         
         self.picker = UIImagePickerController()
         self.picker?.delegate = self
@@ -66,6 +67,30 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         super.viewDidLayoutSubviews()
         
         setupViews()
+    }
+    
+    func initTemplateImage() {
+        // fill template image
+        self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
+        
+        // fill theme color in blank area
+        UIGraphicsBeginImageContext(imgViewTemp.frame.size)
+        
+        let ctx = UIGraphicsGetCurrentContext()
+        rtImgWorkArea = self.imgViewTemp.frameForImageInImageViewAspectFit()
+        imgViewTemp.image?.draw(in: rtImgWorkArea!)
+        
+        ctx?.setStrokeColor(Common.colorTheme.cgColor)
+        ctx?.setFillColor(Common.colorTheme.cgColor)
+        ctx?.fill(CGRect(x: 0, y: 0, width: imgViewTemp.frame.width, height: rtImgWorkArea!.origin.y))
+        ctx?.fill(CGRect(x: 0,
+                         y: rtImgWorkArea!.origin.y + rtImgWorkArea!.height,
+                         width: rtImgWorkArea!.width,
+                         height: imgViewTemp.frame.height - rtImgWorkArea!.origin.y + rtImgWorkArea!.height))
+        
+        self.imgViewTemp.image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
     }
     
     /// add sticker to view
@@ -142,7 +167,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         let image = self.viewWork.capture()
         let imageMain = image.crop(rect: self.imgViewTemp.frame)
-        let imageSave = imageMain.crop(rect: self.imgViewTemp.frameForImageInImageViewAspectFit())
+        let imageSave = imageMain.crop(rect: rtImgWorkArea!)
         UIImageWriteToSavedPhotosAlbum(imageSave, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
@@ -154,7 +179,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         self.firstImageView = {
             let iv = DraggableImageView()
-            iv.backgroundColor = .white
             iv.isUserInteractionEnabled = true
             return iv
         }()

@@ -174,7 +174,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="642"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.08235294118" green="0.63137254899999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.9586445052" green="0.96010767490000004" blue="0.93454974599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="W15-oY-UyC" firstAttribute="top" secondItem="oUc-Y8-9zL" secondAttribute="top" id="Jcr-GR-lfE"/>
                                     <constraint firstItem="W15-oY-UyC" firstAttribute="leading" secondItem="oUc-Y8-9zL" secondAttribute="leading" id="ORS-IM-yeq"/>
@@ -321,7 +321,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.9586445052" green="0.96010767490000004" blue="0.93454974599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oUc-Y8-9zL" firstAttribute="leading" secondItem="I3i-E6-br5" secondAttribute="leading" id="CsX-Is-Faz"/>
                             <constraint firstItem="buy-Zo-8cZ" firstAttribute="top" secondItem="I3i-E6-br5" secondAttribute="bottom" constant="-232" id="G1w-mL-uxI"/>
