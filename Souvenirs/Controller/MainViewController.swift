@@ -20,6 +20,9 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     var rtImgWorkArea: CGRect?
     var firstImageView: DraggableImageView?
     
+    var viewTopMask: UIView?
+    var viewBottomMask: UIView?
+    
     @IBOutlet weak var viewWork: UIView!
     @IBOutlet weak var imgViewTemp: UIImageView!
     @IBOutlet weak var constraintToolbarOffset: NSLayoutConstraint!
@@ -30,14 +33,24 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initTemplateImage()
+        
+        // fill template image
+        self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
         
         self.picker = UIImagePickerController()
         self.picker?.delegate = self
         
         // Initialize sticker panel
         showStickerPanel(show: false)
+        
+        // top & bottom mask view
+        viewTopMask = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        viewTopMask?.backgroundColor = Common.colorTheme
+        viewBottomMask = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        viewBottomMask?.backgroundColor = Common.colorTheme
+        
+        self.viewWork.addSubview(viewTopMask!)
+        self.viewWork.addSubview(viewBottomMask!)
         
         //
         // Initialize for gesture
@@ -70,27 +83,14 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     
     func initTemplateImage() {
-        // fill template image
-        self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
-        
-        // fill theme color in blank area
-        UIGraphicsBeginImageContext(imgViewTemp.frame.size)
-        
-        let ctx = UIGraphicsGetCurrentContext()
         rtImgWorkArea = self.imgViewTemp.frameForImageInImageViewAspectFit()
-        imgViewTemp.image?.draw(in: rtImgWorkArea!)
         
-        ctx?.setStrokeColor(Common.colorTheme.cgColor)
-        ctx?.setFillColor(Common.colorTheme.cgColor)
-        ctx?.fill(CGRect(x: 0, y: 0, width: imgViewTemp.frame.width, height: rtImgWorkArea!.origin.y))
-        ctx?.fill(CGRect(x: 0,
-                         y: rtImgWorkArea!.origin.y + rtImgWorkArea!.height,
-                         width: rtImgWorkArea!.width,
-                         height: imgViewTemp.frame.height - rtImgWorkArea!.origin.y + rtImgWorkArea!.height))
-        
-        self.imgViewTemp.image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
+        // resize top & bottom
+        viewTopMask?.frame = CGRect(x: 0, y: 0, width: imgViewTemp.frame.width, height: rtImgWorkArea!.origin.y)
+        viewBottomMask?.frame = CGRect(x: 0,
+                                       y: rtImgWorkArea!.origin.y + rtImgWorkArea!.height,
+                                       width: rtImgWorkArea!.width,
+                                       height: imgViewTemp.frame.height - rtImgWorkArea!.origin.y + rtImgWorkArea!.height)
     }
     
     /// add sticker to view
@@ -173,20 +173,21 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     
     // MARK: Image
     func setupViews() {
-        if self.firstImageView != nil {
-            return
+        
+        initTemplateImage()
+        
+        if self.firstImageView == nil {
+            self.firstImageView = {
+                let iv = DraggableImageView()
+                iv.isUserInteractionEnabled = true
+                iv.contentMode = .scaleAspectFit
+                return iv
+            }()
+            
+            self.viewWork.insertSubview(self.firstImageView!, at: 0)
         }
         
-        self.firstImageView = {
-            let iv = DraggableImageView()
-            iv.isUserInteractionEnabled = true
-            iv.contentMode = .scaleAspectFit
-            return iv
-        }()
-        
         print("\(self.viewWork.frame.minX), \(self.viewWork.frame.minY), \(self.viewWork.frame.maxX), \(self.viewWork.frame.maxY)")
-        
-        self.viewWork.insertSubview(self.firstImageView!, at: 0)
         
         let originX = template!.rectContent!.origin.x * self.viewWork.frame.size.width
         let originY = rtImgWorkArea!.origin.y + template!.rectContent!.origin.y * rtImgWorkArea!.height
@@ -393,9 +394,13 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     func makeImageTransparent(transparent: Bool) {
         if (transparent) {
             self.imgViewTemp.alpha = 0.5
+            viewTopMask!.alpha = 0.5
+            viewBottomMask!.alpha = 0.5
         }
         else {
             self.imgViewTemp.alpha = 1
+            viewTopMask!.alpha = 1
+            viewBottomMask!.alpha = 1
         }
     }
     
