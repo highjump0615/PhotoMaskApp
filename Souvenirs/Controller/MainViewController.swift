@@ -178,7 +178,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         
         // go to image process page
         let imageVC = self.storyboard!.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
-        imageVC.imgMain = chosenImage
+        imageVC.imgMain = chosenImage.normalizedImage()
         imageVC.delegate = self
         self.navigationController?.pushViewController(imageVC, animated: true)
 

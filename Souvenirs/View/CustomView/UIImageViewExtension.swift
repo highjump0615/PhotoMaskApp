@@ -32,6 +32,19 @@ public extension UIImage {
         let image = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
         return image
     }
+    
+    func normalizedImage() -> UIImage? {
+        if self.imageOrientation == .up {
+            return self
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: self.size))
+        let imgNorm = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return imgNorm
+    }
 }
 
 extension UIImageView {
