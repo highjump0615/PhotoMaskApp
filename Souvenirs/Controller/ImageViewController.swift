@@ -62,7 +62,7 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // draw parameters
-    var lastPoint: CGPoint!
+    var lastPoint: CGPoint! = CGPoint(x: 0, y: 0)
     
     var extractDone = false
     
@@ -75,18 +75,14 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
         // init main image
         self.imgViewMain.image = imgMain
         
-        // touch event
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(pan))
-        panGesture.delegate = self
-        imgViewDraw.addGestureRecognizer(panGesture)
-        
         // init face image
         SVProgressHUD.show(withStatus: "Initializing image data...")
         DispatchQueue.global(qos: .background).async {
             let bundle = Bundle(for: type(of: self))
             ImageObject.initializeFaceDetect(bundle.bundlePath)
             
-            self.imgObjFace = ImageObject.init(image: self.imgMain)
+            // compres image
+            self.imgObjFace = ImageObject.init(image: self.imgMain?.resized(withPercentage: 0.3))
             
             // not detected face
             DispatchQueue.main.async {
@@ -116,57 +112,6 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
         butPenRedraw.isEnabled = enable
     }
 
-    @IBAction func pan(_ gesture: UIPanGestureRecognizer) {
-        
-        if drawMode == DRAW_NONE {
-            return
-        }
-        
-        let position = gesture.location(in: self.imgViewDraw)
-        let pointDraw = CGPoint(x: position.x / imgViewDraw.frame.size.width * 400,
-                                y: position.y / imgViewDraw.frame.size.height * 400)
-        
-        if drawMode == DRAW_FOREGROUND {
-            pointsFg.append(pointDraw)
-        }
-        else if drawMode == DRAW_BACKGROUND {
-            pointsBg.append(pointDraw)
-        }
-        
-        if gesture.state == .changed {
-            
-            // draw lines
-            let renderer = UIGraphicsImageRenderer(size: self.imgViewDraw.frame.size)
-            let img = renderer.image { ctx in
-                self.imgViewDraw.drawHierarchy(in: self.imgViewDraw.bounds, afterScreenUpdates: true)
-                ctx.cgContext.setStrokeColor(drawMode == DRAW_BACKGROUND ? UIColor.blue.cgColor : UIColor.red.cgColor)
-                ctx.cgContext.setLineWidth(3)
-                
-                ctx.cgContext.move(to: lastPoint)
-                ctx.cgContext.addLine(to: position)
-                ctx.cgContext.drawPath(using: .stroke)
-            }
-            
-            self.imgViewDraw.image = img
-        }
-        
-        if gesture.state == .ended {
-            if extractDone {
-                drawMode = DRAW_NONE
-            }
-            else {
-                // change mode
-                if drawMode == DRAW_BACKGROUND {
-                    drawMode = DRAW_FOREGROUND
-                }
-                else if drawMode == DRAW_FOREGROUND {
-                    drawMode = DRAW_NONE
-                }
-            }
-        }
-        
-        lastPoint = position
-    }
 
     /*
     // MARK: - Navigation
@@ -177,6 +122,71 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let currentPoint = touch.location(in: self.imgViewDraw)
+        
+        lastPoint = currentPoint
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let currentPoint = touch.location(in: self.imgViewDraw)
+
+        if drawMode == DRAW_NONE {
+            return
+        }
+        
+        let imgSize = self.imgViewMain.image?.size
+        let ptAdd = CGPoint(x: (CGFloat)(currentPoint.x / self.imgViewDraw.frame.size.width * imgSize!.width),
+                            y: (CGFloat)(currentPoint.y / self.imgViewDraw.frame.size.height * imgSize!.height))
+        if drawMode == DRAW_FOREGROUND {
+            pointsFg.append(ptAdd)
+        }
+        else if drawMode == DRAW_BACKGROUND {
+            pointsBg.append(ptAdd)
+        }
+        
+        UIGraphicsBeginImageContext(self.imgViewDraw.frame.size)
+        
+        let ctx = UIGraphicsGetCurrentContext()
+        self.imgViewDraw.image?.draw(in: self.imgViewDraw.bounds)
+        
+        ctx?.move(to: lastPoint)
+        ctx?.addLine(to: currentPoint)
+        ctx?.setLineWidth(3.0)
+        ctx?.setLineCap(.round)
+        ctx?.setStrokeColor(drawMode == DRAW_BACKGROUND ? UIColor.blue.cgColor : UIColor.red.cgColor)
+        ctx?.setBlendMode(.normal)
+        ctx?.strokePath()
+        
+        self.imgViewDraw.image = UIGraphicsGetImageFromCurrentImageContext()
+//        self.imgViewDraw.alpha = 1
+        
+        UIGraphicsEndImageContext()
+        
+        lastPoint = currentPoint
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if drawMode == DRAW_NONE {
+            return
+        }
+        
+        if extractDone {
+            drawMode = DRAW_NONE
+        }
+        else {
+            // change mode
+            if drawMode == DRAW_BACKGROUND {
+                drawMode = DRAW_FOREGROUND
+            }
+            else if drawMode == DRAW_FOREGROUND {
+                drawMode = DRAW_NONE
+            }
+        }
+    }
     
     @IBAction func onButExtractFace(_ sender: Any) {
         SVProgressHUD.show(withStatus: "Extracting face area...")
@@ -191,6 +201,11 @@ class ImageViewController: UIViewController, UIGestureRecognizerDelegate {
             
             DispatchQueue.main.async {
                 self.imgViewMain.image = imgResult;
+                
+                // resize draw image area based on cropped face size
+                let frameImgView = self.imgViewMain.frameForImageInImageViewAspectFit()
+                self.imgViewDraw.frame = frameImgView.offsetBy(dx: self.imgViewMain.frame.origin.x,
+                                                               dy: self.imgViewMain.frame.origin.y)
                 
                 SVProgressHUD.dismiss()
                 self.enableDrawButtons(enable: true)

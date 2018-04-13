@@ -401,8 +401,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         self.firstImageView!.contentMode = .scaleAspectFill
 
         // Make template semi-transparent
-        makeImageTransparent(transparent: true)
-        
-        self.firstImageView?.backgroundColor = UIColor.clear
+//        makeImageTransparent(transparent: true)
     }
 }

@@ -39,6 +39,9 @@
     }
     
     for (int i = 0; i < points.count; i++) {
+        if (i % 2)
+            continue;
+        
         CGPoint point = [points[i] CGPointValue];
         
         pt.x = (int)point.x;
