@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import MessageUI
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CHTStickerViewDelegate, HumanImageDelegate {
+class MainViewController: UIViewController,
+                        UIGestureRecognizerDelegate,
+                        UIImagePickerControllerDelegate,
+                        UINavigationControllerDelegate,
+                        MFMailComposeViewControllerDelegate,
+                        CHTStickerViewDelegate,
+                        HumanImageDelegate {
     
     var template: Template?
     var picker : UIImagePickerController?
@@ -168,7 +175,61 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         let image = self.viewWork.capture()
         let imageMain = image.crop(rect: self.imgViewTemp.frame)
         let imageSave = imageMain.crop(rect: rtImgWorkArea!)
-        UIImageWriteToSavedPhotosAlbum(imageSave, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+        //
+        // save to pdf
+        //
+        
+        // make 300dpi image
+        let my300dpiImage = UIImage(cgImage: imageSave.cgImage!, scale: 300.0 / 72.0, orientation: imageSave.imageOrientation)
+        
+        // setup file name
+        let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentDirectory = documentDirectories[0]
+        let pdfFileNameUrl = NSURL(fileURLWithPath: documentDirectory).appendingPathComponent("mypdf.pdf")
+        let pdfFileName = pdfFileNameUrl?.path
+        
+        // write to pdf
+        UIGraphicsBeginPDFContextToFile(pdfFileName!, CGRect.zero, nil)
+        
+        let nWidth = 72 * 4 // 4 inches
+        let nHeight = 72 * 5 // 4 inches
+        
+        UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: nWidth, height: nHeight), nil);
+        
+        // image height & offset
+        let fImgWidth = CGFloat(nWidth)
+        let fImgHeight = my300dpiImage.size.height / (my300dpiImage.size.width / fImgWidth)
+        let fOffset = (CGFloat(nHeight) - fImgHeight) / 2
+        my300dpiImage.draw(in: CGRect(x: 0, y: fOffset, width: fImgWidth, height: fImgHeight))
+        
+        UIGraphicsEndPDFContext()
+        
+        print("pdf file was made: \(pdfFileName)")
+        
+        // send email
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setSubject("Photo from High Res Souvenirs")
+            mail.setMessageBody("<p>Photo edited by High Res Souvenirs App</p>", isHTML: true)
+            
+            if let fileData = NSData(contentsOfFile: pdfFileName!) {
+                mail.addAttachmentData(fileData as Data,
+                                       mimeType: "application/pdf",
+                                       fileName: "Souvenirs.pdf")
+            }
+                
+            present(mail, animated: true)
+        }
+        else {
+            // show failure alert
+            let ac = UIAlertController(title: "Cannot send email", message: "You may set up email accounts in your device", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+        
+//        UIImageWriteToSavedPhotosAlbum(my300dpiImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     // MARK: Image
@@ -434,5 +495,15 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
 
         // Make template semi-transparent
 //        makeImageTransparent(transparent: true)
+    }
+    
+    // MARK: - MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+        
+        // show failure alert
+        let ac = UIAlertController(title: "Email Sent!", message: "Photo PDF file is sent to your email.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
 }
