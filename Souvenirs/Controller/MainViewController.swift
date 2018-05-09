@@ -13,7 +13,6 @@ class MainViewController: UIViewController,
                         UIGestureRecognizerDelegate,
                         UIImagePickerControllerDelegate,
                         UINavigationControllerDelegate,
-                        MFMailComposeViewControllerDelegate,
                         CHTStickerViewDelegate,
                         HumanImageDelegate {
     
@@ -172,6 +171,9 @@ class MainViewController: UIViewController,
         // hide edit frmaes before save
         hideStickerEditFrame()
         
+        //
+        // extract image
+        //
         let image = self.viewWork.capture()
         let imageMain = image.crop(rect: self.imgViewTemp.frame)
         let imageSave = imageMain.crop(rect: rtImgWorkArea!)
@@ -182,7 +184,7 @@ class MainViewController: UIViewController,
         
         // make 300dpi image
         let my300dpiImage = UIImage(cgImage: imageSave.cgImage!, scale: 300.0 / 72.0, orientation: imageSave.imageOrientation)
-        
+
         // setup file name
         let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentDirectory = documentDirectories[0]
@@ -205,31 +207,49 @@ class MainViewController: UIViewController,
         
         UIGraphicsEndPDFContext()
         
-        print("pdf file was made: \(pdfFileName)")
         
-        // send email
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setSubject("Photo from High Res Souvenirs")
-            mail.setMessageBody("<p>Photo edited by High Res Souvenirs App</p>", isHTML: true)
-            
+        //
+        // show actionsheet for save or share
+        //
+        let alertController = UIAlertController(title: "Save image", message: "You can save photo as image or Pdf", preferredStyle: .actionSheet)
+        
+        let butImgSave = UIAlertAction(title: "Save into Photos", style: .default, handler: { (action) -> Void in
+            UIImageWriteToSavedPhotosAlbum(my300dpiImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        })
+        
+        let butImgShare = UIAlertAction(title: "Share with PDF", style: .destructive, handler: { (action) -> Void in
             if let fileData = NSData(contentsOfFile: pdfFileName!) {
-                mail.addAttachmentData(fileData as Data,
-                                       mimeType: "application/pdf",
-                                       fileName: "Souvenirs.pdf")
-            }
+                let activityViewController = UIActivityViewController(activityItems: [fileData], applicationActivities: nil)
+
+                activityViewController.setValue("Photo from High Res Souvenirs" , forKey: "subject") ;
+                activityViewController.excludedActivityTypes = [
+                    .postToTwitter,
+                    .postToWeibo,
+                    .message,
+                    .markupAsPDF,
+                    .copyToPasteboard,
+                    .assignToContact,
+                    .saveToCameraRoll,
+                    .addToReadingList,
+                    .postToFlickr,
+                    .postToVimeo,
+                    .postToTencentWeibo,
+                    .openInIBooks
+                ]
                 
-            present(mail, animated: true)
-        }
-        else {
-            // show failure alert
-            let ac = UIAlertController(title: "Cannot send email", message: "You may set up email accounts in your device", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
-        }
+                self.present(activityViewController, animated: true, completion: {})
+            }
+        })
         
-//        UIImageWriteToSavedPhotosAlbum(my300dpiImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        let butImgCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            print("Cancel button tapped")
+        })
+        
+        alertController.addAction(butImgSave)
+        alertController.addAction(butImgShare)
+        alertController.addAction(butImgCancel)
+        
+        self.navigationController!.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Image
@@ -272,83 +292,6 @@ class MainViewController: UIViewController,
         self.navigationController?.pushViewController(imageVC, animated: true)
 
         dismiss(animated: true, completion: nil)
-    }
-    
-    func sFunc_imageFixOrientation(img:UIImage) -> UIImage {
-        
-        // No-op if the orientation is already correct
-        if (img.imageOrientation == UIImageOrientation.up) {
-            return img;
-        }
-        // We need to calculate the proper transformation to make the image upright.
-        // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
-        var transform:CGAffineTransform = CGAffineTransform.identity
-        
-        if (img.imageOrientation == UIImageOrientation.down
-            || img.imageOrientation == UIImageOrientation.downMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.width, y: img.size.height)
-            transform = transform.rotated(by: CGFloat.pi)
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.left
-            || img.imageOrientation == UIImageOrientation.leftMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.width, y: 0)
-            transform = transform.rotated(by: CGFloat.pi/2)
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.right
-            || img.imageOrientation == UIImageOrientation.rightMirrored) {
-            
-            transform = transform.translatedBy(x: 0, y: img.size.height);
-            transform = transform.rotated(by: -CGFloat.pi/2);
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.upMirrored
-            || img.imageOrientation == UIImageOrientation.downMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.width, y: 0)
-            transform = transform.scaledBy(x: -1, y: 1)
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.leftMirrored
-            || img.imageOrientation == UIImageOrientation.rightMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.height, y: 0);
-            transform = transform.scaledBy(x: -1, y: 1);
-        }
-        
-        
-        // Now we draw the underlying CGImage into a new context, applying the transform
-        // calculated above.
-        let ctx:CGContext = CGContext(data: nil, width: Int(img.size.width), height: Int(img.size.height),
-                                      bitsPerComponent: img.cgImage!.bitsPerComponent, bytesPerRow: 0,
-                                      space: img.cgImage!.colorSpace!,
-                                      bitmapInfo: img.cgImage!.bitmapInfo.rawValue)!
-        
-        ctx.concatenate(transform)
-        
-        
-        if (img.imageOrientation == UIImageOrientation.left
-            || img.imageOrientation == UIImageOrientation.leftMirrored
-            || img.imageOrientation == UIImageOrientation.right
-            || img.imageOrientation == UIImageOrientation.rightMirrored
-            ) {
-            
-            
-            ctx.draw(img.cgImage!, in: CGRect(x:0,y:0,width:img.size.height,height:img.size.width))
-            
-        } else {
-            ctx.draw(img.cgImage!, in: CGRect(x:0,y:0,width:img.size.width,height:img.size.height))
-        }
-        
-        
-        // And now we just create a new UIImage from the drawing context
-        let cgimg:CGImage = ctx.makeImage()!
-        let imgEnd:UIImage = UIImage(cgImage: cgimg)
-        
-        return imgEnd
     }
     
     // MARK: - Gestures
@@ -490,20 +433,10 @@ class MainViewController: UIViewController,
 
     // MARK: - HumanImageDelegate
     func setImageExtracted(img: UIImage) {
-        self.firstImageView!.image  = sFunc_imageFixOrientation(img: img)
+        self.firstImageView!.image  = img
         self.firstImageView!.contentMode = .scaleAspectFill
 
         // Make template semi-transparent
 //        makeImageTransparent(transparent: true)
-    }
-    
-    // MARK: - MFMailComposeViewControllerDelegate
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-        
-        // show failure alert
-        let ac = UIAlertController(title: "Email Sent!", message: "Photo PDF file is sent to your email.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
     }
 }
