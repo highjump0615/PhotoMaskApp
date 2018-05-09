@@ -86,6 +86,9 @@
 		C3448C96207780D200DDC0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3448C95207780D200DDC0F5 /* CoreGraphics.framework */; };
 		C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D71F20230D4A00AACFED /* LaunchScreen.storyboard */; };
 		C346D72420230D4B00AACFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D72120230D4A00AACFED /* Main.storyboard */; };
+		C350C33420A39C100066F4F3 /* vrasta_high_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */; };
+		C350C33520A39C100066F4F3 /* vrasta_high_front.png in Resources */ = {isa = PBXBuildFile; fileRef = C350C33320A39C100066F4F3 /* vrasta_high_front.png */; };
+		C350C33720A3A3BD0066F4F3 /* vrasta_high_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */; };
 		C352F5A32077F09B0014714B /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A22077F09A0014714B /* opencv2.framework */; };
 		C352F5A52077FD850014714B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A42077FD850014714B /* Accelerate.framework */; };
 		C352F5A72077FD920014714B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A62077FD910014714B /* AssetsLibrary.framework */; };
@@ -239,6 +242,9 @@
 		C346D72020230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C346D72220230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C34F2B9120799E3300443B66 /* SSE2NEON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSE2NEON.h; sourceTree = "<group>"; };
+		C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vrasta_high_bg.jpg; sourceTree = "<group>"; };
+		C350C33320A39C100066F4F3 /* vrasta_high_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vrasta_high_front.png; sourceTree = "<group>"; };
+		C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vrasta_high_thumb.png; sourceTree = "<group>"; };
 		C352F5A02077F07C0014714B /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Framework; sourceTree = "<group>"; };
 		C352F5A22077F09A0014714B /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Framework/opencv2.framework; sourceTree = "<group>"; };
 		C352F5A42077FD850014714B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -534,6 +540,9 @@
 		C329A5B120245FF9006CE55B /* Template */ = {
 			isa = PBXGroup;
 			children = (
+				C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */,
+				C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */,
+				C350C33320A39C100066F4F3 /* vrasta_high_front.png */,
 				C338166F203B6ADF00490E7A /* losag_bg.png */,
 				C3381671203B6ADF00490E7A /* losag_thumb.png */,
 				C3381670203B6ADF00490E7A /* losfa_bg.png */,
@@ -898,6 +907,7 @@
 				C30301F720263851007079AC /* Glass0.png in Resources */,
 				C3381675203B6ADF00490E7A /* losfa_bg.png in Resources */,
 				C329A5B620246412006CE55B /* winnerbest2_bg.png in Resources */,
+				C350C33420A39C100066F4F3 /* vrasta_high_bg.jpg in Resources */,
 				C352F5EB207809FC0014714B /* 2_Step_3_2.dat in Resources */,
 				C303020F20263852007079AC /* Mustasch6.png in Resources */,
 				C303020E20263852007079AC /* Mustasch5.png in Resources */,
@@ -913,9 +923,11 @@
 				C3381674203B6ADF00490E7A /* losag_bg.png in Resources */,
 				C30301FD20263852007079AC /* Glass14.png in Resources */,
 				C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */,
+				C350C33720A3A3BD0066F4F3 /* vrasta_high_thumb.png in Resources */,
 				C303020A20263852007079AC /* Mustasch1.png in Resources */,
 				C352F5F1207809FC0014714B /* rcpr_38_pn_4_sh_C.mem in Resources */,
 				C30301E920263851007079AC /* AFRO0.png in Resources */,
+				C350C33520A39C100066F4F3 /* vrasta_high_front.png in Resources */,
 				C30301F020263851007079AC /* BEARD3.png in Resources */,
 				C352F5EF207809FC0014714B /* rcpr_38_pn_4_flt_4.mem in Resources */,
 				C303021E20263852007079AC /* Swag7.png in Resources */,

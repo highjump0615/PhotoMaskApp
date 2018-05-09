@@ -10,6 +10,7 @@ class Template {
     
     var name: String
     var imgPathBackground: String?
+    var imgPathTempBg: String?
     var imgPathThumb: String?
     
     var rectContent: CGRect?

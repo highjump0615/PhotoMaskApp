@@ -75,6 +75,16 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
                                       width: 367 / 612.0,
                                       height: 367 / 792.0)
         self.templates.append(template)
+        
+        template = Template(name: "Venis Rasta")
+        template.imgPathBackground = "vrasta_high_front"
+        template.imgPathTempBg = "vrasta_high_bg.jpg"
+        template.imgPathThumb = "vrasta_high_thumb.png"
+        template.rectContent = CGRect(x: 95 / 300.0,
+                                      y: 67 / 250.0,
+                                      width: 131 / 300.0,
+                                      height: 131 / 250.0)
+        self.templates.append(template)
     }
 
     override func didReceiveMemoryWarning() {

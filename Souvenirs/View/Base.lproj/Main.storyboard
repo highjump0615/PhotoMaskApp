@@ -170,6 +170,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-Y8-9zL">
                                 <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="flr-uA-mkq">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W15-oY-UyC">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
                                     </imageView>
@@ -177,8 +180,12 @@
                                 <color key="backgroundColor" red="0.9586445052" green="0.96010767490000004" blue="0.93454974599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="W15-oY-UyC" firstAttribute="top" secondItem="oUc-Y8-9zL" secondAttribute="top" id="Jcr-GR-lfE"/>
+                                    <constraint firstItem="flr-uA-mkq" firstAttribute="centerX" secondItem="W15-oY-UyC" secondAttribute="centerX" id="L9q-Bl-MMk"/>
                                     <constraint firstItem="W15-oY-UyC" firstAttribute="leading" secondItem="oUc-Y8-9zL" secondAttribute="leading" id="ORS-IM-yeq"/>
                                     <constraint firstAttribute="bottom" secondItem="W15-oY-UyC" secondAttribute="bottom" constant="48" id="cTA-Dg-oce"/>
+                                    <constraint firstItem="flr-uA-mkq" firstAttribute="height" secondItem="W15-oY-UyC" secondAttribute="height" id="dJx-Y1-mMe"/>
+                                    <constraint firstItem="flr-uA-mkq" firstAttribute="centerY" secondItem="W15-oY-UyC" secondAttribute="centerY" id="gVC-HC-kOv"/>
+                                    <constraint firstItem="flr-uA-mkq" firstAttribute="width" secondItem="W15-oY-UyC" secondAttribute="width" id="ifx-im-w66"/>
                                     <constraint firstAttribute="trailing" secondItem="W15-oY-UyC" secondAttribute="trailing" id="wjV-iT-x7b"/>
                                 </constraints>
                             </view>
@@ -340,6 +347,7 @@
                         <outlet property="constraintToolbarOffset" destination="G1w-mL-uxI" id="0yr-W2-blD"/>
                         <outlet property="contentView" destination="UlP-Rs-5kb" id="Ko0-ro-cc0"/>
                         <outlet property="imgViewTemp" destination="W15-oY-UyC" id="t1j-9q-tcl"/>
+                        <outlet property="imgViewTempBg" destination="flr-uA-mkq" id="iXB-l1-2L5"/>
                         <outlet property="panelView" destination="buy-Zo-8cZ" id="nmY-0n-mFs"/>
                         <outlet property="viewWork" destination="oUc-Y8-9zL" id="rvU-f2-LuN"/>
                     </connections>

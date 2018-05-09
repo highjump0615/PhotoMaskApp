@@ -30,6 +30,7 @@ class MainViewController: UIViewController,
     var viewBottomMask: UIView?
     
     @IBOutlet weak var viewWork: UIView!
+    @IBOutlet weak var imgViewTempBg: UIImageView!
     @IBOutlet weak var imgViewTemp: UIImageView!
     @IBOutlet weak var constraintToolbarOffset: NSLayoutConstraint!
     @IBOutlet var contentView: UIView!
@@ -42,6 +43,9 @@ class MainViewController: UIViewController,
         
         // fill template image
         self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
+        if (self.template?.imgPathTempBg != nil) {
+            self.imgViewTempBg.image = UIImage(named: (self.template?.imgPathTempBg)!)
+        }
         
         self.picker = UIImagePickerController()
         self.picker?.delegate = self
@@ -118,7 +122,7 @@ class MainViewController: UIViewController,
         stickerView.setImage(UIImage(named: "StickerFlip"), for: .flip)
         stickerView.setHandlerSize(30)
         stickerView.showEditingHandlers = true
-        self.viewWork.insertSubview(stickerView, at: 2)
+        self.viewWork.insertSubview(stickerView, at: 3)
     }
     
 
@@ -265,7 +269,7 @@ class MainViewController: UIViewController,
                 return iv
             }()
             
-            self.viewWork.insertSubview(self.firstImageView!, at: 0)
+            self.viewWork.insertSubview(self.firstImageView!, at: 1)
         }
         
         print("\(self.viewWork.frame.minX), \(self.viewWork.frame.minY), \(self.viewWork.frame.maxX), \(self.viewWork.frame.maxY)")
