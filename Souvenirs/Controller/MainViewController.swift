@@ -217,6 +217,12 @@ class MainViewController: UIViewController,
         //
         let alertController = UIAlertController(title: "Save image", message: "You can save photo as image or Pdf", preferredStyle: .actionSheet)
         
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
         let butImgSave = UIAlertAction(title: "Save into Photos", style: .default, handler: { (action) -> Void in
             UIImageWriteToSavedPhotosAlbum(my300dpiImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
         })
@@ -224,6 +230,12 @@ class MainViewController: UIViewController,
         let butImgShare = UIAlertAction(title: "Share with PDF", style: .destructive, handler: { (action) -> Void in
             if let fileData = NSData(contentsOfFile: pdfFileName!) {
                 let activityViewController = UIActivityViewController(activityItems: [fileData], applicationActivities: nil)
+                
+                if let popoverController = activityViewController.popoverPresentationController {
+                    popoverController.sourceView = self.view
+                    popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                    popoverController.permittedArrowDirections = []
+                }
 
                 activityViewController.setValue("Photo from High Res Souvenirs" , forKey: "subject") ;
                 activityViewController.excludedActivityTypes = [
