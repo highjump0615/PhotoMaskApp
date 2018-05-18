@@ -132,6 +132,8 @@
 		C366DD012038348400AB3334 /* ActivationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366DD002038348400AB3334 /* ActivationViewController.swift */; };
 		C3733DFF2038058600398C6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3733DFE2038058500398C6C /* GoogleService-Info.plist */; };
 		C383313F20237252007339C1 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C383313E20237252007339C1 /* LandingViewController.swift */; };
+		C393912320AE0B360022D787 /* TextStickerView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C393912220AE0B360022D787 /* TextStickerView_iPhone.xib */; };
+		C393912520AE1FF00022D787 /* TextStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C393912420AE1FF00022D787 /* TextStickerView.swift */; };
 		C39CBE6C2020F84F009BBF02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39CBE6B2020F84F009BBF02 /* AppDelegate.swift */; };
 		C39CBE732020F84F009BBF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C39CBE722020F84F009BBF02 /* Assets.xcassets */; };
 		C39CBE812020F850009BBF02 /* SouvenirsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39CBE802020F850009BBF02 /* SouvenirsTests.swift */; };
@@ -298,6 +300,8 @@
 		C366DD002038348400AB3334 /* ActivationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivationViewController.swift; sourceTree = "<group>"; };
 		C3733DFE2038058500398C6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C383313E20237252007339C1 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		C393912220AE0B360022D787 /* TextStickerView_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextStickerView_iPhone.xib; sourceTree = "<group>"; };
+		C393912420AE1FF00022D787 /* TextStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStickerView.swift; sourceTree = "<group>"; };
 		C39CBE682020F84F009BBF02 /* Souvenirs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Souvenirs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39CBE6B2020F84F009BBF02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C39CBE722020F84F009BBF02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -583,6 +587,7 @@
 		C346D71E20230D4A00AACFED /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C393912120AE0AD90022D787 /* TextStickerView */,
 				C3030223202645A2007079AC /* CustomView */,
 				C30301AA20263457007079AC /* StickerPanelView */,
 				C329A5C020250257006CE55B /* DraggableImageView */,
@@ -656,6 +661,15 @@
 				C352F5CE207809FC0014714B /* rcpr_38_psh_14.mem */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		C393912120AE0AD90022D787 /* TextStickerView */ = {
+			isa = PBXGroup;
+			children = (
+				C393912220AE0B360022D787 /* TextStickerView_iPhone.xib */,
+				C393912420AE1FF00022D787 /* TextStickerView.swift */,
+			);
+			path = TextStickerView;
 			sourceTree = "<group>";
 		};
 		C39CBE5F2020F84F009BBF02 = {
@@ -869,6 +883,7 @@
 				C303021820263852007079AC /* Swag15.png in Resources */,
 				C352F5DD207809FC0014714B /* 1_Step_1_3.dat in Resources */,
 				C352F5F3207809FC0014714B /* rcpr_38_psh_14.mem in Resources */,
+				C393912320AE0B360022D787 /* TextStickerView_iPhone.xib in Resources */,
 				C352F5EC207809FC0014714B /* 2_Step_3_3.dat in Resources */,
 				C352F5EA207809FC0014714B /* 2_Step_3_1.dat in Resources */,
 				C303020520263852007079AC /* Glass6.png in Resources */,
@@ -1150,6 +1165,7 @@
 				C303022520264795007079AC /* UIViewExtension.swift in Sources */,
 				C352F5F6207809FC0014714B /* MainProc.cpp in Sources */,
 				C329A5AB2024553B006CE55B /* SelectViewController.swift in Sources */,
+				C393912520AE1FF00022D787 /* TextStickerView.swift in Sources */,
 				C352F5F7207809FC0014714B /* nrutil.cpp in Sources */,
 				C383313F20237252007339C1 /* LandingViewController.swift in Sources */,
 				C329A5C22025027C006CE55B /* DraggableImageView.swift in Sources */,

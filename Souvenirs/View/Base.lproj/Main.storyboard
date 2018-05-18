@@ -228,6 +228,17 @@
                                                     <action selector="onButSticker:" destination="cGw-Bu-H97" eventType="touchUpInside" id="BlT-D1-OKB"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWd-uG-WgR">
+                                                <rect key="frame" x="224" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="Kgj-xY-Avv"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <state key="normal" image="Text"/>
+                                                <connections>
+                                                    <action selector="onButTextSticker:" destination="cGw-Bu-H97" eventType="touchUpInside" id="J92-0x-vhn"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLV-mI-km5">
                                                 <rect key="frame" x="136" y="0.0" width="48" height="48"/>
                                                 <constraints>
@@ -246,11 +257,14 @@
                                             <constraint firstAttribute="trailing" secondItem="JUf-Eh-Xh9" secondAttribute="trailing" id="5ai-re-ubp"/>
                                             <constraint firstAttribute="height" constant="48" id="D2x-GF-LLl"/>
                                             <constraint firstItem="HWJ-RT-Kvy" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="LMq-fm-kQm"/>
+                                            <constraint firstItem="iWd-uG-WgR" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="MiQ-0N-ZR5"/>
                                             <constraint firstItem="JUf-Eh-Xh9" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="TfX-lN-9Om"/>
                                             <constraint firstItem="dez-pk-0qQ" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="acp-Gk-TYY"/>
                                             <constraint firstItem="CLV-mI-km5" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="top" id="atu-Cc-Fr0"/>
+                                            <constraint firstAttribute="bottom" secondItem="iWd-uG-WgR" secondAttribute="bottom" id="bsv-kI-TIS"/>
                                             <constraint firstAttribute="bottom" secondItem="JUf-Eh-Xh9" secondAttribute="bottom" id="dwK-Qd-E8x"/>
                                             <constraint firstAttribute="bottom" secondItem="HWJ-RT-Kvy" secondAttribute="bottom" id="f27-MK-Hxr"/>
+                                            <constraint firstItem="JUf-Eh-Xh9" firstAttribute="leading" secondItem="iWd-uG-WgR" secondAttribute="trailing" id="nfd-yO-Qyt"/>
                                             <constraint firstItem="dez-pk-0qQ" firstAttribute="leading" secondItem="HWJ-RT-Kvy" secondAttribute="trailing" id="vha-zJ-Jsm"/>
                                             <constraint firstAttribute="bottom" secondItem="dez-pk-0qQ" secondAttribute="bottom" id="wQK-mv-z8I"/>
                                             <constraint firstAttribute="bottom" secondItem="CLV-mI-km5" secondAttribute="bottom" id="ywd-lB-yFE"/>
@@ -314,14 +328,22 @@
                                             <outlet property="scrollViewCategory" destination="Y1O-vB-4bl" id="qfp-Ok-GGw"/>
                                         </connections>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSJ-Sr-Yjt" userLabel="Text Sticker View">
+                                        <rect key="frame" x="0.0" y="48" width="320" height="184"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="wpY-SJ-CKI" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="bottom" id="1Z7-eE-Cht"/>
+                                    <constraint firstItem="gSJ-Sr-Yjt" firstAttribute="leading" secondItem="buy-Zo-8cZ" secondAttribute="leading" id="9DF-ke-6aD"/>
+                                    <constraint firstAttribute="bottom" secondItem="gSJ-Sr-Yjt" secondAttribute="bottom" id="9lS-hy-Kh7"/>
                                     <constraint firstAttribute="height" constant="232" id="I0d-z0-HVs"/>
                                     <constraint firstItem="s3D-Eh-8Yc" firstAttribute="top" secondItem="buy-Zo-8cZ" secondAttribute="top" id="Ox4-2H-Yxz"/>
                                     <constraint firstAttribute="bottom" secondItem="wpY-SJ-CKI" secondAttribute="bottom" id="V6C-xh-NhF"/>
                                     <constraint firstItem="wpY-SJ-CKI" firstAttribute="leading" secondItem="buy-Zo-8cZ" secondAttribute="leading" id="Xdl-M9-yYF"/>
+                                    <constraint firstAttribute="trailing" secondItem="gSJ-Sr-Yjt" secondAttribute="trailing" id="XkO-SK-Ewv"/>
+                                    <constraint firstItem="gSJ-Sr-Yjt" firstAttribute="top" secondItem="s3D-Eh-8Yc" secondAttribute="bottom" id="ZFr-Iw-FDd"/>
                                     <constraint firstItem="s3D-Eh-8Yc" firstAttribute="leading" secondItem="buy-Zo-8cZ" secondAttribute="leading" id="mx5-lw-4uy"/>
                                     <constraint firstAttribute="trailing" secondItem="s3D-Eh-8Yc" secondAttribute="trailing" id="xph-ci-xjM"/>
                                     <constraint firstAttribute="trailing" secondItem="wpY-SJ-CKI" secondAttribute="trailing" id="y0i-yY-wo5"/>
@@ -344,11 +366,14 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="butSticker" destination="JUf-Eh-Xh9" id="Kjp-cB-Xj7"/>
+                        <outlet property="butTextSticker" destination="iWd-uG-WgR" id="1LW-pH-Zpw"/>
                         <outlet property="constraintToolbarOffset" destination="G1w-mL-uxI" id="0yr-W2-blD"/>
                         <outlet property="contentView" destination="UlP-Rs-5kb" id="Ko0-ro-cc0"/>
                         <outlet property="imgViewTemp" destination="W15-oY-UyC" id="t1j-9q-tcl"/>
                         <outlet property="imgViewTempBg" destination="flr-uA-mkq" id="iXB-l1-2L5"/>
                         <outlet property="panelView" destination="buy-Zo-8cZ" id="nmY-0n-mFs"/>
+                        <outlet property="stickerPanelView" destination="wpY-SJ-CKI" id="xoQ-8k-Ho9"/>
+                        <outlet property="textStickerPanelView" destination="gSJ-Sr-Yjt" id="xAs-Fa-B52"/>
                         <outlet property="viewWork" destination="oUc-Y8-9zL" id="rvU-f2-LuN"/>
                     </connections>
                 </viewController>
@@ -725,6 +750,7 @@
         <image name="Redraw" width="72" height="72"/>
         <image name="Save" width="72" height="72"/>
         <image name="Sticker" width="72" height="72"/>
+        <image name="Text" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hia-I0-QJc"/>

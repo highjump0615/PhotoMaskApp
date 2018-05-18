@@ -36,7 +36,11 @@ class MainViewController: UIViewController,
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var panelView: UIView!
     
+    @IBOutlet weak var stickerPanelView: StickerPanelView!
+    @IBOutlet weak var textStickerPanelView: UIView!
+    
     @IBOutlet weak var butSticker: UIButton!
+    @IBOutlet weak var butTextSticker: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +55,7 @@ class MainViewController: UIViewController,
         self.picker?.delegate = self
         
         // Initialize sticker panel
-        showStickerPanel(show: false)
+        showStickerPanel()
         
         // top & bottom mask view
         viewTopMask = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -79,6 +83,10 @@ class MainViewController: UIViewController,
         contentView.addGestureRecognizer(self.rotationGesture!)
         contentView.addGestureRecognizer(self.panGesture!)
         contentView.addGestureRecognizer(tapGesture)
+        
+        // text sticker view
+        let viewTextSticker = TextStickerView.loadFromNib()
+        self.textStickerPanelView.addSubview(viewTextSticker)
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,22 +144,54 @@ class MainViewController: UIViewController,
     }
     */
     
+    func clearButtonSelection() {
+        self.butSticker.isSelected = false;
+        
+    }
+
+    
+    /// Sticker  button click
+    ///
+    /// - Parameter sender: <#sender description#>
     @IBAction func onButSticker(_ sender: UIButton) {
+        self.butTextSticker.isSelected = false;
         self.butSticker.isSelected = !self.butSticker.isSelected
         
-        showStickerPanel(show: butSticker.isSelected)
+        showStickerPanel()
     }
     
+    
+    /// Text Sticker button click
+    ///
+    /// - Parameter sender: <#sender description#>
+    @IBAction func onButTextSticker(_ sender: Any) {
+        self.butSticker.isSelected = false;
+        self.butTextSticker.isSelected = !self.butTextSticker.isSelected
+        
+        showStickerPanel()
+    }
     
     /// Show/Hide sticker panel
     ///
     /// - Parameter show: 
-    func showStickerPanel(show: Bool) {
-        if (show) {
+    func showStickerPanel() {
+        if (self.butSticker.isSelected || self.butTextSticker.isSelected) {
+            // panel shoud be shown
             self.constraintToolbarOffset.constant = -232
         }
         else {
             self.constraintToolbarOffset.constant = -48
+        }
+        
+        // sticker view
+        if (self.butSticker.isSelected) {
+            self.stickerPanelView.isHidden = false
+            self.textStickerPanelView.isHidden = true
+        }
+        // text sticker view
+        if (self.butTextSticker.isSelected) {
+            self.stickerPanelView.isHidden = true
+            self.textStickerPanelView.isHidden = false
         }
     }
     
