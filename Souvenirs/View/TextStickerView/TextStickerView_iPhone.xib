@@ -6,53 +6,74 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TextStickerView" customModule="Souvenirs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="184"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="72O-0H-vng">
-                    <rect key="frame" x="8" y="8" width="304" height="168"/>
+                    <rect key="frame" x="8" y="8" width="306" height="168"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1md-wY-BgE">
-                            <rect key="frame" x="0.0" y="0.0" width="148" height="168"/>
-                            <color key="backgroundColor" red="0.32549019610000002" green="0.85098039219999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yM7-Gg-abe">
-                            <rect key="frame" x="156" y="0.0" width="148" height="168"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6OS-tO-0eg">
+                            <rect key="frame" x="0.0" y="0.0" width="149" height="168"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L5p-dF-gte">
-                                    <rect key="frame" x="0.0" y="0.0" width="148" height="168"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1md-wY-BgE" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                    <rect key="frame" x="0.0" y="0.0" width="149" height="140"/>
+                                    <color key="backgroundColor" red="1" green="0.96878832619999999" blue="0.97118890270000002" alpha="0.75635453350000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Add text for Sticker..."/>
+                                    </userDefinedRuntimeAttributes>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snh-KO-bbq">
+                                    <rect key="frame" x="0.0" y="140" width="149" height="28"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <state key="normal" title="Text Size: 12">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onButTextSize:" destination="iN0-l3-epB" eventType="touchUpInside" id="EHS-Ra-RoX"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yM7-Gg-abe">
+                            <rect key="frame" x="157" y="0.0" width="149" height="168"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsK-ff-rwm">
+                                    <rect key="frame" x="0.0" y="0.0" width="149" height="168"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snh-KO-bbq">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="28"/>
-                                            <color key="backgroundColor" red="1" green="0.011367673219999999" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="Text Size: 12">
-                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                        </button>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsK-ff-rwm">
-                                            <rect key="frame" x="0.0" y="28" width="148" height="140"/>
-                                            <color key="backgroundColor" red="0.08235294118" green="0.63137254899999995" blue="0.97254901959999995" alpha="0.5715228873" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVF-4K-T2p">
+                                            <rect key="frame" x="0.0" y="10" width="149" height="149.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="LVF-4K-T2p" secondAttribute="height" multiplier="1:1" id="GD1-RW-pii"/>
+                                            </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </stackView>
+                                    <constraints>
+                                        <constraint firstItem="LVF-4K-T2p" firstAttribute="width" relation="lessThanOrEqual" secondItem="rsK-ff-rwm" secondAttribute="width" id="DnL-XE-yOH"/>
+                                        <constraint firstItem="LVF-4K-T2p" firstAttribute="height" relation="lessThanOrEqual" secondItem="rsK-ff-rwm" secondAttribute="height" id="Kcm-OK-Oi5"/>
+                                        <constraint firstItem="LVF-4K-T2p" firstAttribute="width" secondItem="rsK-ff-rwm" secondAttribute="width" priority="750" id="OEw-GB-cHL"/>
+                                        <constraint firstItem="LVF-4K-T2p" firstAttribute="height" secondItem="rsK-ff-rwm" secondAttribute="height" priority="750" id="dZo-lN-NoD"/>
+                                        <constraint firstItem="LVF-4K-T2p" firstAttribute="centerX" secondItem="rsK-ff-rwm" secondAttribute="centerX" id="edF-YQ-Fuw"/>
+                                        <constraint firstItem="LVF-4K-T2p" firstAttribute="centerY" secondItem="rsK-ff-rwm" secondAttribute="centerY" id="kq5-a5-Njq"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="L5p-dF-gte" secondAttribute="bottom" id="2y8-1V-kox"/>
-                                <constraint firstItem="L5p-dF-gte" firstAttribute="leading" secondItem="yM7-Gg-abe" secondAttribute="leading" id="Dbh-ex-rEW"/>
-                                <constraint firstAttribute="trailing" secondItem="L5p-dF-gte" secondAttribute="trailing" id="HAk-MJ-DOI"/>
-                                <constraint firstItem="L5p-dF-gte" firstAttribute="top" secondItem="yM7-Gg-abe" secondAttribute="top" id="QMJ-na-pu2"/>
+                                <constraint firstAttribute="trailing" secondItem="rsK-ff-rwm" secondAttribute="trailing" id="Fpn-kM-3Si"/>
+                                <constraint firstItem="rsK-ff-rwm" firstAttribute="top" secondItem="yM7-Gg-abe" secondAttribute="top" id="Jd8-13-QzV"/>
+                                <constraint firstAttribute="bottom" secondItem="rsK-ff-rwm" secondAttribute="bottom" id="mro-a5-OtV"/>
+                                <constraint firstItem="rsK-ff-rwm" firstAttribute="leading" secondItem="yM7-Gg-abe" secondAttribute="leading" id="zMR-SU-sk6"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -68,6 +89,10 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="mViewColorPicker" destination="LVF-4K-T2p" id="D6R-V6-lmM"/>
+            </connections>
+            <point key="canvasLocation" x="13" y="58"/>
         </view>
     </objects>
 </document>

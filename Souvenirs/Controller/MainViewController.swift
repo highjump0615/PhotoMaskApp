@@ -8,13 +8,16 @@
 
 import UIKit
 import MessageUI
+import IHKeyboardAvoiding
+import ChromaColorPicker
 
 class MainViewController: UIViewController,
                         UIGestureRecognizerDelegate,
                         UIImagePickerControllerDelegate,
                         UINavigationControllerDelegate,
                         CHTStickerViewDelegate,
-                        HumanImageDelegate {
+                        HumanImageDelegate,
+                        ChromaColorPickerDelegate {
     
     var template: Template?
     var picker : UIImagePickerController?
@@ -28,6 +31,8 @@ class MainViewController: UIViewController,
     
     var viewTopMask: UIView?
     var viewBottomMask: UIView?
+    
+    var viewTextSticker: TextStickerView?
     
     @IBOutlet weak var viewWork: UIView!
     @IBOutlet weak var imgViewTempBg: UIImageView!
@@ -84,9 +89,14 @@ class MainViewController: UIViewController,
         contentView.addGestureRecognizer(self.panGesture!)
         contentView.addGestureRecognizer(tapGesture)
         
+        KeyboardAvoiding.avoidingView = self.panelView
+        
         // text sticker view
-        let viewTextSticker = TextStickerView.loadFromNib()
-        self.textStickerPanelView.addSubview(viewTextSticker)
+        viewTextSticker?.removeFromSuperview()
+        viewTextSticker = TextStickerView.loadFromNib() as? TextStickerView
+        viewTextSticker?.initView(delegate: self)
+        
+        self.textStickerPanelView.addSubview(viewTextSticker!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -335,6 +345,8 @@ class MainViewController: UIViewController,
                                             y: originY,
                                             width: width,
                                             height: height)
+        
+        viewTextSticker?.initView(delegate: self)
     }
     
     // MARK: - Image Picker Process
@@ -426,6 +438,10 @@ class MainViewController: UIViewController,
             
             return false
         }
+        
+        // close the keyboard
+        self.view.endEditing(true)
+        
         // touched unnecessary view, cancel this gesture
         if touch.view!.isDescendant(of: self.panelView) {
             return false
@@ -487,12 +503,20 @@ class MainViewController: UIViewController,
         }
     }
 
+    //
     // MARK: - HumanImageDelegate
+    //
     func setImageExtracted(img: UIImage) {
         self.firstImageView!.image  = img
         self.firstImageView!.contentMode = .scaleAspectFill
 
         // Make template semi-transparent
 //        makeImageTransparent(transparent: true)
+    }
+    
+    //
+    // MARK: - ChromaColorPickerDelegate
+    //
+    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
     }
 }

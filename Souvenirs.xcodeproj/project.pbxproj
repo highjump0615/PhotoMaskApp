@@ -78,6 +78,8 @@
 		C329A5BC20246842006CE55B /* TemplateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5BB20246842006CE55B /* TemplateCollectionViewCell.swift */; };
 		C329A5BE2024C95C006CE55B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5BD2024C95C006CE55B /* MainViewController.swift */; };
 		C329A5C22025027C006CE55B /* DraggableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C329A5C12025027C006CE55B /* DraggableImageView.swift */; };
+		C3331F5E20AEDB7A0033ADDA /* PickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3331F5D20AEDB7A0033ADDA /* PickerDialog.swift */; };
+		C3331F6020AEEAE70033ADDA /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3331F5F20AEEAE70033ADDA /* UIColorExtension.swift */; };
 		C3381672203B6ADF00490E7A /* losfa_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166D203B6ADE00490E7A /* losfa_thumb.png */; };
 		C3381673203B6ADF00490E7A /* wanted_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166E203B6ADE00490E7A /* wanted_bg.png */; };
 		C3381674203B6ADF00490E7A /* losag_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C338166F203B6ADF00490E7A /* losag_bg.png */; };
@@ -234,6 +236,8 @@
 		C329A5BB20246842006CE55B /* TemplateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCollectionViewCell.swift; sourceTree = "<group>"; };
 		C329A5BD2024C95C006CE55B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C329A5C12025027C006CE55B /* DraggableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableImageView.swift; sourceTree = "<group>"; };
+		C3331F5D20AEDB7A0033ADDA /* PickerDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDialog.swift; sourceTree = "<group>"; };
+		C3331F5F20AEEAE70033ADDA /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		C338166D203B6ADE00490E7A /* losfa_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losfa_thumb.png; sourceTree = "<group>"; };
 		C338166E203B6ADE00490E7A /* wanted_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wanted_bg.png; sourceTree = "<group>"; };
 		C338166F203B6ADF00490E7A /* losag_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losag_bg.png; sourceTree = "<group>"; };
@@ -508,6 +512,8 @@
 			children = (
 				C303022420264795007079AC /* UIViewExtension.swift */,
 				C3C3603020276292005A5442 /* UIImageViewExtension.swift */,
+				C3331F5D20AEDB7A0033ADDA /* PickerDialog.swift */,
+				C3331F5F20AEEAE70033ADDA /* UIColorExtension.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1130,14 +1136,20 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Souvenirs/Pods-Souvenirs-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/KMPlaceholderTextView/KMPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -1169,11 +1181,13 @@
 				C352F5F7207809FC0014714B /* nrutil.cpp in Sources */,
 				C383313F20237252007339C1 /* LandingViewController.swift in Sources */,
 				C329A5C22025027C006CE55B /* DraggableImageView.swift in Sources */,
+				C3331F6020AEEAE70033ADDA /* UIColorExtension.swift in Sources */,
 				C366DCFF2038327A00AB3334 /* User.swift in Sources */,
 				C329A5BE2024C95C006CE55B /* MainViewController.swift in Sources */,
 				C366DD012038348400AB3334 /* ActivationViewController.swift in Sources */,
 				C352F5FE20780CB90014714B /* ImageHelper.mm in Sources */,
 				C352F5F5207809FC0014714B /* LandmarkDetect.cpp in Sources */,
+				C3331F5E20AEDB7A0033ADDA /* PickerDialog.swift in Sources */,
 				C3030227202656A1007079AC /* StickerCategory.swift in Sources */,
 				C3C3602C20275412005A5442 /* StickerCollectionViewCell.swift in Sources */,
 				C3AC9E6C202F88A800C4B7CF /* CHTStickerView.m in Sources */,

@@ -1,4 +1,5 @@
 PODS:
+  - ChromaColorPicker (1.7)
   - Firebase/Core (4.9.0):
     - FirebaseAnalytics (= 4.0.9)
     - FirebaseCore (= 4.0.15)
@@ -21,6 +22,8 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
+  - IHKeyboardAvoiding (4.2)
+  - KMPlaceholderTextView (1.3.0)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -30,21 +33,27 @@ PODS:
   - SVProgressHUD (2.2.3)
 
 DEPENDENCIES:
+  - ChromaColorPicker
   - Firebase/Core
   - Firebase/Database
+  - IHKeyboardAvoiding
+  - KMPlaceholderTextView (~> 1.3.0)
   - SVProgressHUD
 
 SPEC CHECKSUMS:
+  ChromaColorPicker: 33efa67b17cca51dd253689d18b83ac7e05642c2
   Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
   FirebaseCore: 3bd047463058fa6b5d312c97502c52e45401cdfb
   FirebaseDatabase: de4446507ccd3257fca37d16f40e1540324571fd
   FirebaseInstanceID: d2058a35e9bebda1b6dd42486b84917bde552a9d
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
+  KMPlaceholderTextView: 2bbcd19a273648a80a61e1e48f9743a24d8930e3
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SVProgressHUD: a5eaeff664a82dda89809c409ace40183ce91523
 
-PODFILE CHECKSUM: b218ff3ab424ba34dce374a3bbcf211e0247092f
+PODFILE CHECKSUM: 3bd1f5cd699f42aaa6075f7891209c8e1ec17bab
 
 COCOAPODS: 1.3.1

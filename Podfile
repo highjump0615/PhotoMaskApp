@@ -9,6 +9,9 @@ target 'Souvenirs' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'SVProgressHUD'
+  pod 'IHKeyboardAvoiding'
+  pod 'KMPlaceholderTextView', '~> 1.3.0'
+  pod 'ChromaColorPicker'
 
   target 'SouvenirsTests' do
     inherit! :search_paths
