@@ -17,7 +17,8 @@ class MainViewController: UIViewController,
                         UINavigationControllerDelegate,
                         CHTStickerViewDelegate,
                         HumanImageDelegate,
-                        ChromaColorPickerDelegate {
+                        TextStickerViewDelegate,
+                        UITextViewDelegate {
     
     var template: Template?
     var picker : UIImagePickerController?
@@ -33,6 +34,12 @@ class MainViewController: UIViewController,
     var viewBottomMask: UIView?
     
     var viewTextSticker: TextStickerView?
+    
+    var currentStickerView: CHTStickerView?
+    
+    // text sticker params
+    var stickerTextSize = 20
+    var stickerTextColor = UIColor.red
     
     @IBOutlet weak var viewWork: UIView!
     @IBOutlet weak var imgViewTempBg: UIImageView!
@@ -95,6 +102,8 @@ class MainViewController: UIViewController,
         viewTextSticker?.removeFromSuperview()
         viewTextSticker = TextStickerView.loadFromNib() as? TextStickerView
         viewTextSticker?.initView(delegate: self)
+        viewTextSticker?.setTextDelegate(delgate: self)
+        clearTextStickerView()
         
         self.textStickerPanelView.addSubview(viewTextSticker!)
     }
@@ -140,7 +149,48 @@ class MainViewController: UIViewController,
         stickerView.setImage(UIImage(named: "StickerFlip"), for: .flip)
         stickerView.setHandlerSize(30)
         stickerView.showEditingHandlers = true
+        
+        currentStickerView = stickerView
+        
         self.viewWork.insertSubview(stickerView, at: 3)
+    }
+    
+    func addTextSticker(text: String) {
+        hideStickerEditFrame()
+        
+        let textFont = UIFont(name: "Helvetica Bold", size: CGFloat(stickerTextSize))!
+        
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: stickerTextColor,
+            ] as [NSAttributedStringKey : Any]
+        let size = (text as NSString).size(withAttributes: textFontAttributes)
+
+        let stickerLabel: UILabel = UILabel()
+        stickerLabel.font = textFont
+        stickerLabel.textColor = stickerTextColor
+        stickerLabel.text = text
+        stickerLabel.sizeToFit()
+        stickerLabel.frame.size = CGSize(width: max(stickerLabel.frame.width, 44),
+                                         height: max(stickerLabel.frame.height, 30))
+        
+        let screenSize = UIScreen.main.bounds.size
+        let stickerView: CHTStickerView = CHTStickerView(contentView: stickerLabel)
+        
+        stickerView.center = CGPoint(x: screenSize.width / 2, y: screenSize.height / 2)
+        stickerView.delegate = self
+        stickerView.outlineBorderColor = UIColor.clear
+        stickerView.setImage(UIImage(named: "StickerClose"), for: .close)
+        stickerView.setImage(UIImage(named: "StickerRotate"), for: .rotate)
+        stickerView.setHandlerSize(30)
+        stickerView.showEditingHandlers = true
+        
+        stickerView.enableFlip = false
+        
+        self.viewWork.insertSubview(stickerView, at: 3)
+        
+        print("new text sticker size: \(size.width), \(size.height)")
+        currentStickerView = stickerView
     }
     
 
@@ -219,6 +269,10 @@ class MainViewController: UIViewController,
     @IBAction func onButGallery(_ sender: Any) {
         self.picker?.sourceType = UIImagePickerControllerSourceType.photoLibrary
         self.present(self.picker!, animated: true, completion: nil)
+    }
+    
+    func clearTextStickerView() {
+        viewTextSticker?.initTextSizeColor(text: "", size: 20, color: UIColor.red)
     }
     
     @IBAction func onButSave(_ sender: Any) {
@@ -366,6 +420,7 @@ class MainViewController: UIViewController,
     
     @IBAction func tap(_ gesture: UITapGestureRecognizer) {
         hideStickerEditFrame()
+        clearTextStickerView()
     }
     
     @IBAction func pan(_ gesture: UIPanGestureRecognizer) {
@@ -421,8 +476,9 @@ class MainViewController: UIViewController,
         return true
     }
     
+    //
     // MARK: - UIGestureRecognizerDelegate
-    
+    //
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
@@ -431,10 +487,21 @@ class MainViewController: UIViewController,
         // touched sticker view, cancel this gesture
         if touch.view is CHTStickerView {
             hideStickerEditFrame()
+            clearTextStickerView()
             
             // show edit frame
             let stickerView = touch.view as! CHTStickerView
             stickerView.showEditingHandlers = true
+            
+            currentStickerView = stickerView
+            
+            // init edit view for text sticker
+            if stickerView.contentView is UILabel {
+                let viewLabel = stickerView.contentView as! UILabel
+                viewTextSticker?.initTextSizeColor(text: viewLabel.text!,
+                                                   size: Int(viewLabel.font.pointSize),
+                                                   color: viewLabel.textColor)
+            }
             
             return false
         }
@@ -488,6 +555,8 @@ class MainViewController: UIViewController,
                 stickerView.showEditingHandlers = false
             }
         }
+        
+        currentStickerView = nil
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -514,9 +583,48 @@ class MainViewController: UIViewController,
 //        makeImageTransparent(transparent: true)
     }
     
-    //
-    // MARK: - ChromaColorPickerDelegate
-    //
-    func colorPickerDidChooseColor(_ colorPicker: ChromaColorPicker, color: UIColor) {
+    func getCurrentStickerLabel() -> UILabel? {
+        if currentStickerView == nil {
+            return nil
+        }
+        
+        return currentStickerView!.contentView as? UILabel
     }
+    
+    //
+    // MARK: - TextStickerViewDelegate
+    //
+    func updatedTextColor(color: UIColor) {
+        let stickerLabel = getCurrentStickerLabel()
+        stickerLabel?.textColor = color
+        
+        stickerTextColor = color
+    }
+    
+    func updatedTextSize(size: Int) {
+        let stickerLabel = getCurrentStickerLabel()
+        stickerLabel?.font = UIFont(name: "Helvetica Bold", size: CGFloat(size))
+        
+        stickerTextSize = size
+    }
+    
+    //
+    // MARK: - UITextViewDelegate
+    //
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+    
+            if getCurrentStickerLabel() == nil {
+                addTextSticker(text: textView.text)
+            }
+            else {
+                // update text
+                let stickerLabel = getCurrentStickerLabel()
+                stickerLabel?.text = textView.text
+            }
+        }
+        return true
+    }
+    
 }

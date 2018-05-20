@@ -43,6 +43,12 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="snh-KO-bbq" firstAttribute="top" secondItem="1md-wY-BgE" secondAttribute="bottom" id="ED5-9q-KAD"/>
+                                <constraint firstAttribute="trailing" secondItem="snh-KO-bbq" secondAttribute="trailing" id="TD4-NS-Pum"/>
+                                <constraint firstItem="snh-KO-bbq" firstAttribute="leading" secondItem="6OS-tO-0eg" secondAttribute="leading" id="ZG5-qG-S7A"/>
+                                <constraint firstAttribute="bottom" secondItem="snh-KO-bbq" secondAttribute="bottom" id="pVK-tM-QF3"/>
+                            </constraints>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yM7-Gg-abe">
                             <rect key="frame" x="157" y="0.0" width="149" height="168"/>
@@ -90,6 +96,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="mButTextSize" destination="snh-KO-bbq" id="m1p-Hl-th4"/>
+                <outlet property="mText" destination="1md-wY-BgE" id="pXR-Gy-gkp"/>
                 <outlet property="mViewColorPicker" destination="LVF-4K-T2p" id="D6R-V6-lmM"/>
             </connections>
             <point key="canvasLocation" x="13" y="58"/>
