@@ -37,6 +37,9 @@ class MainViewController: UIViewController,
     
     var currentStickerView: CHTStickerView?
     
+    // right bar items
+    @IBOutlet weak var butItemSave: UIBarButtonItem!
+    
     // text sticker params
     var stickerTextSize = 20
     var stickerTextColor = UIColor.red
@@ -51,11 +54,15 @@ class MainViewController: UIViewController,
     @IBOutlet weak var stickerPanelView: StickerPanelView!
     @IBOutlet weak var textStickerPanelView: UIView!
     
+    @IBOutlet weak var butFlip: UIButton!
     @IBOutlet weak var butSticker: UIButton!
     @IBOutlet weak var butTextSticker: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // right buttons
+        self.navigationItem.rightBarButtonItem = butItemSave
         
         // fill template image
         self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
@@ -220,6 +227,14 @@ class MainViewController: UIViewController,
         showStickerPanel()
     }
     
+    /// Flip button click
+    ///
+    /// - Parameter sender: <#sender description#>
+    @IBAction func onButFlip(_ sender: UIButton) {
+        self.butFlip.isSelected = !self.butFlip.isSelected
+        
+        firstImageView?.transform = CGAffineTransform(scaleX: self.butFlip.isSelected ? -1 : 1, y: 1)
+    }
     
     /// Text Sticker button click
     ///

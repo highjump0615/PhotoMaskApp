@@ -168,13 +168,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-Y8-9zL">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="flr-uA-mkq">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="324"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W15-oY-UyC">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="324"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.9586445052" green="0.96010767490000004" blue="0.93454974599999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -190,7 +190,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buy-Zo-8cZ">
-                                <rect key="frame" x="0.0" y="248" width="320" height="232"/>
+                                <rect key="frame" x="0.0" y="204" width="320" height="232"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3D-Eh-8Yc" userLabel="Tool bar">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
@@ -244,9 +244,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="48" id="xQQ-tH-mYe"/>
                                                 </constraints>
-                                                <state key="normal" image="Save"/>
+                                                <state key="normal" image="Flip"/>
                                                 <connections>
-                                                    <action selector="onButSave:" destination="cGw-Bu-H97" eventType="touchUpInside" id="PE9-VZ-Qlp"/>
+                                                    <action selector="onButFlip:" destination="cGw-Bu-H97" eventType="touchUpInside" id="V85-dW-i14"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -362,9 +362,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I3i-E6-br5"/>
                     </view>
-                    <toolbarItems/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <toolbarItems>
+                        <barButtonItem image="Save" id="c4W-zq-mNv">
+                            <connections>
+                                <action selector="onButSave:" destination="cGw-Bu-H97" id="5hz-7t-rXJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="butFlip" destination="CLV-mI-km5" id="iQv-xy-Yd3"/>
+                        <outlet property="butItemSave" destination="c4W-zq-mNv" id="7H3-cN-Agz"/>
                         <outlet property="butSticker" destination="JUf-Eh-Xh9" id="Kjp-cB-Xj7"/>
                         <outlet property="butTextSticker" destination="iWd-uG-WgR" id="1LW-pH-Zpw"/>
                         <outlet property="constraintToolbarOffset" destination="G1w-mL-uxI" id="0yr-W2-blD"/>
@@ -745,10 +753,11 @@
         <image name="Camera" width="72" height="72"/>
         <image name="DrawPen" width="72" height="72"/>
         <image name="Face" width="72" height="72"/>
+        <image name="Flip" width="37" height="37"/>
         <image name="Gallery" width="72" height="72"/>
         <image name="Logo" width="1024" height="1024"/>
         <image name="Redraw" width="72" height="72"/>
-        <image name="Save" width="72" height="72"/>
+        <image name="Save" width="37" height="37"/>
         <image name="Sticker" width="72" height="72"/>
         <image name="Text" width="72" height="72"/>
     </resources>
