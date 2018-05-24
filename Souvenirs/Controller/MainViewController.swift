@@ -33,6 +33,8 @@ class MainViewController: UIViewController,
     var viewTopMask: UIView?
     var viewBottomMask: UIView?
     
+    var imgViewPreview: UIImageView?
+    
     var viewTextSticker: TextStickerView?
     
     var currentStickerView: CHTStickerView?
@@ -82,8 +84,13 @@ class MainViewController: UIViewController,
         viewBottomMask = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         viewBottomMask?.backgroundColor = Common.colorTheme
         
+        // image view for flipped preview
+        imgViewPreview = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        imgViewPreview?.isHidden = true
+        
         self.viewWork.addSubview(viewTopMask!)
         self.viewWork.addSubview(viewBottomMask!)
+        self.viewWork.addSubview(imgViewPreview!)
         
         //
         // Initialize for gesture
@@ -135,6 +142,11 @@ class MainViewController: UIViewController,
                                        y: rtImgWorkArea!.origin.y + rtImgWorkArea!.height,
                                        width: rtImgWorkArea!.width,
                                        height: imgViewTemp.frame.height - rtImgWorkArea!.origin.y + rtImgWorkArea!.height)
+        
+        // resize preview image
+        imgViewPreview?.frame = CGRect(x: 0, y: rtImgWorkArea!.origin.y,
+                                       width: rtImgWorkArea!.width,
+                                       height: rtImgWorkArea!.height)
     }
     
     /// add sticker to view
@@ -231,9 +243,24 @@ class MainViewController: UIViewController,
     ///
     /// - Parameter sender: <#sender description#>
     @IBAction func onButFlip(_ sender: UIButton) {
-        self.butFlip.isSelected = !self.butFlip.isSelected
+        hideStickerEditFrame()
         
-        firstImageView?.transform = CGAffineTransform(scaleX: self.butFlip.isSelected ? -1 : 1, y: 1)
+        butFlip.isSelected = !self.butFlip.isSelected
+        
+        if (butFlip.isSelected) {
+            let imgMain = extractImage()
+            
+            // flip image view horizontally
+            imgViewPreview?.transform = CGAffineTransform(scaleX: -1, y: 1)
+            imgViewPreview?.image = imgMain
+            imgViewPreview?.isHidden = false
+        }
+        else {
+            imgViewPreview?.isHidden = true
+        }
+        
+        // enable/disable stickers
+        enableStickers(enable: !butFlip.isSelected)
     }
     
     /// Text Sticker button click
@@ -290,6 +317,17 @@ class MainViewController: UIViewController,
         viewTextSticker?.initTextSizeColor(text: "", size: 20, color: UIColor.red)
     }
     
+    
+    /// extract work image
+    ///
+    /// - Returns: <#return value description#>
+    func extractImage() -> UIImage {
+        let image = self.viewWork.capture()
+        let imageMain = image.crop(rect: self.imgViewTemp.frame)
+        
+        return imageMain.crop(rect: rtImgWorkArea!)
+    }
+    
     @IBAction func onButSave(_ sender: Any) {
         // hide edit frmaes before save
         hideStickerEditFrame()
@@ -297,16 +335,21 @@ class MainViewController: UIViewController,
         //
         // extract image
         //
-        let image = self.viewWork.capture()
-        let imageMain = image.crop(rect: self.imgViewTemp.frame)
-        let imageSave = imageMain.crop(rect: rtImgWorkArea!)
+        var imageSave = imgViewPreview?.image
+        if (imgViewPreview!.isHidden) {
+            imageSave = extractImage()
+        }
+        else {
+            // image from preview flip image horizontally
+            imageSave = imageSave?.withHorizontallyFlippedOrientation()
+        }
         
         //
         // save to pdf
         //
         
         // make 300dpi image
-        let my300dpiImage = UIImage(cgImage: imageSave.cgImage!, scale: 300.0 / 72.0, orientation: imageSave.imageOrientation)
+        let my300dpiImage = UIImage(cgImage: imageSave!.cgImage!, scale: 300.0 / 72.0, orientation: imageSave!.imageOrientation)
 
         // setup file name
         let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
@@ -487,6 +530,11 @@ class MainViewController: UIViewController,
         if firstImageView!.image == nil {
             return false
         }
+        
+        // lock in flipped state
+        if (butFlip.isSelected) {
+            return false
+        }
 
         return true
     }
@@ -572,6 +620,18 @@ class MainViewController: UIViewController,
         }
         
         currentStickerView = nil
+    }
+    
+    /// enable stickers
+    ///
+    /// - Parameter enable: <#enable description#>
+    func enableStickers(enable: Bool) {
+        for view in self.viewWork.subviews {
+            if (view is CHTStickerView) {
+                let stickerView = view as! CHTStickerView
+                stickerView.isUserInteractionEnabled = enable
+            }
+        }
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
