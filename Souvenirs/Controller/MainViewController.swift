@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import MessageUI
+import IHKeyboardAvoiding
+import ChromaColorPicker
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CHTStickerViewDelegate {
+class MainViewController: UIViewController,
+                        UIGestureRecognizerDelegate,
+                        UIImagePickerControllerDelegate,
+                        UINavigationControllerDelegate,
+                        CHTStickerViewDelegate,
+                        HumanImageDelegate,
+                        TextStickerViewDelegate,
+                        UITextViewDelegate {
     
     var template: Template?
     var picker : UIImagePickerController?
@@ -17,26 +27,70 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     var rotationGesture: UIRotationGestureRecognizer?
     var panGesture: UIPanGestureRecognizer?
     
+    var rtImgWorkArea: CGRect?
     var firstImageView: DraggableImageView?
     
+    var viewTopMask: UIView?
+    var viewBottomMask: UIView?
+    
+    var imgViewPreview: UIImageView?
+    
+    var viewTextSticker: TextStickerView?
+    
+    var currentStickerView: CHTStickerView?
+    
+    // right bar items
+    @IBOutlet weak var butItemSave: UIBarButtonItem!
+    
+    // text sticker params
+    var stickerTextSize = 20
+    var stickerTextColor = UIColor.red
+    
     @IBOutlet weak var viewWork: UIView!
+    @IBOutlet weak var imgViewTempBg: UIImageView!
     @IBOutlet weak var imgViewTemp: UIImageView!
     @IBOutlet weak var constraintToolbarOffset: NSLayoutConstraint!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var panelView: UIView!
     
+    @IBOutlet weak var stickerPanelView: StickerPanelView!
+    @IBOutlet weak var textStickerPanelView: UIView!
+    
+    @IBOutlet weak var butFlip: UIButton!
     @IBOutlet weak var butSticker: UIButton!
+    @IBOutlet weak var butTextSticker: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // right buttons
+        self.navigationItem.rightBarButtonItem = butItemSave
+        
+        // fill template image
         self.imgViewTemp.image = UIImage(named: (self.template?.imgPathBackground)!)
+        if (self.template?.imgPathTempBg != nil) {
+            self.imgViewTempBg.image = UIImage(named: (self.template?.imgPathTempBg)!)
+        }
         
         self.picker = UIImagePickerController()
         self.picker?.delegate = self
         
         // Initialize sticker panel
-        showStickerPanel(show: false)
+        showStickerPanel()
+        
+        // top & bottom mask view
+        viewTopMask = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        viewTopMask?.backgroundColor = Common.colorTheme
+        viewBottomMask = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        viewBottomMask?.backgroundColor = Common.colorTheme
+        
+        // image view for flipped preview
+        imgViewPreview = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        imgViewPreview?.isHidden = true
+        
+        self.viewWork.addSubview(viewTopMask!)
+        self.viewWork.addSubview(viewBottomMask!)
+        self.viewWork.addSubview(imgViewPreview!)
         
         //
         // Initialize for gesture
@@ -55,6 +109,17 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         contentView.addGestureRecognizer(self.rotationGesture!)
         contentView.addGestureRecognizer(self.panGesture!)
         contentView.addGestureRecognizer(tapGesture)
+        
+        KeyboardAvoiding.avoidingView = self.panelView
+        
+        // text sticker view
+        viewTextSticker?.removeFromSuperview()
+        viewTextSticker = TextStickerView.loadFromNib() as? TextStickerView
+        viewTextSticker?.initView(delegate: self)
+        viewTextSticker?.setTextDelegate(delgate: self)
+        clearTextStickerView()
+        
+        self.textStickerPanelView.addSubview(viewTextSticker!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,6 +131,22 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         super.viewDidLayoutSubviews()
         
         setupViews()
+    }
+    
+    func initTemplateImage() {
+        rtImgWorkArea = self.imgViewTemp.frameForImageInImageViewAspectFit()
+        
+        // resize top & bottom
+        viewTopMask?.frame = CGRect(x: 0, y: 0, width: imgViewTemp.frame.width, height: rtImgWorkArea!.origin.y)
+        viewBottomMask?.frame = CGRect(x: 0,
+                                       y: rtImgWorkArea!.origin.y + rtImgWorkArea!.height,
+                                       width: rtImgWorkArea!.width,
+                                       height: imgViewTemp.frame.height - rtImgWorkArea!.origin.y + rtImgWorkArea!.height)
+        
+        // resize preview image
+        imgViewPreview?.frame = CGRect(x: 0, y: rtImgWorkArea!.origin.y,
+                                       width: rtImgWorkArea!.width,
+                                       height: rtImgWorkArea!.height)
     }
     
     /// add sticker to view
@@ -87,7 +168,48 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         stickerView.setImage(UIImage(named: "StickerFlip"), for: .flip)
         stickerView.setHandlerSize(30)
         stickerView.showEditingHandlers = true
-        self.viewWork.insertSubview(stickerView, at: 2)
+        
+        currentStickerView = stickerView
+        
+        self.viewWork.insertSubview(stickerView, at: 3)
+    }
+    
+    func addTextSticker(text: String) {
+        hideStickerEditFrame()
+        
+        let textFont = UIFont(name: "Helvetica Bold", size: CGFloat(stickerTextSize))!
+        
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: stickerTextColor,
+            ] as [NSAttributedStringKey : Any]
+        let size = (text as NSString).size(withAttributes: textFontAttributes)
+
+        let stickerLabel: UILabel = UILabel()
+        stickerLabel.font = textFont
+        stickerLabel.textColor = stickerTextColor
+        stickerLabel.text = text
+        stickerLabel.sizeToFit()
+        stickerLabel.frame.size = CGSize(width: max(stickerLabel.frame.width, 44),
+                                         height: max(stickerLabel.frame.height, 30))
+        
+        let screenSize = UIScreen.main.bounds.size
+        let stickerView: CHTStickerView = CHTStickerView(contentView: stickerLabel)
+        
+        stickerView.center = CGPoint(x: screenSize.width / 2, y: screenSize.height / 2)
+        stickerView.delegate = self
+        stickerView.outlineBorderColor = UIColor.clear
+        stickerView.setImage(UIImage(named: "StickerClose"), for: .close)
+        stickerView.setImage(UIImage(named: "StickerRotate"), for: .rotate)
+        stickerView.setHandlerSize(30)
+        stickerView.showEditingHandlers = true
+        
+        stickerView.enableFlip = false
+        
+        self.viewWork.insertSubview(stickerView, at: 3)
+        
+        print("new text sticker size: \(size.width), \(size.height)")
+        currentStickerView = stickerView
     }
     
 
@@ -101,27 +223,82 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     }
     */
     
+    func clearButtonSelection() {
+        self.butSticker.isSelected = false;
+        
+    }
+
+    
+    /// Sticker  button click
+    ///
+    /// - Parameter sender: <#sender description#>
     @IBAction func onButSticker(_ sender: UIButton) {
+        self.butTextSticker.isSelected = false;
         self.butSticker.isSelected = !self.butSticker.isSelected
         
-        showStickerPanel(show: butSticker.isSelected)
+        showStickerPanel()
     }
     
+    /// Flip button click
+    ///
+    /// - Parameter sender: <#sender description#>
+    @IBAction func onButFlip(_ sender: UIButton) {
+        hideStickerEditFrame()
+        
+        butFlip.isSelected = !self.butFlip.isSelected
+        
+        if (butFlip.isSelected) {
+            let imgMain = extractImage()
+            
+            // flip image view horizontally
+            imgViewPreview?.transform = CGAffineTransform(scaleX: -1, y: 1)
+            imgViewPreview?.image = imgMain
+            imgViewPreview?.isHidden = false
+        }
+        else {
+            imgViewPreview?.isHidden = true
+        }
+        
+        // enable/disable stickers
+        enableStickers(enable: !butFlip.isSelected)
+    }
+    
+    /// Text Sticker button click
+    ///
+    /// - Parameter sender: <#sender description#>
+    @IBAction func onButTextSticker(_ sender: Any) {
+        self.butSticker.isSelected = false;
+        self.butTextSticker.isSelected = !self.butTextSticker.isSelected
+        
+        showStickerPanel()
+    }
     
     /// Show/Hide sticker panel
     ///
     /// - Parameter show: 
-    func showStickerPanel(show: Bool) {
-        if (show) {
+    func showStickerPanel() {
+        if (self.butSticker.isSelected || self.butTextSticker.isSelected) {
+            // panel shoud be shown
             self.constraintToolbarOffset.constant = -232
         }
         else {
             self.constraintToolbarOffset.constant = -48
         }
+        
+        // sticker view
+        if (self.butSticker.isSelected) {
+            self.stickerPanelView.isHidden = false
+            self.textStickerPanelView.isHidden = true
+        }
+        // text sticker view
+        if (self.butTextSticker.isSelected) {
+            self.stickerPanelView.isHidden = true
+            self.textStickerPanelView.isHidden = false
+        }
     }
     
     @IBAction func onButCamera(_ sender: Any) {
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+        if UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
             picker?.sourceType = UIImagePickerControllerSourceType.camera
             self.present(picker!, animated: true, completion: nil)
         } else {
@@ -136,134 +313,172 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         self.present(self.picker!, animated: true, completion: nil)
     }
     
+    func clearTextStickerView() {
+        viewTextSticker?.initTextSizeColor(text: "", size: 20, color: UIColor.red)
+    }
+    
+    
+    /// extract work image
+    ///
+    /// - Returns: <#return value description#>
+    func extractImage() -> UIImage {
+        let image = self.viewWork.capture()
+        let imageMain = image.crop(rect: self.imgViewTemp.frame)
+        
+        return imageMain.crop(rect: rtImgWorkArea!)
+    }
+    
     @IBAction func onButSave(_ sender: Any) {
         // hide edit frmaes before save
         hideStickerEditFrame()
         
-        let image = self.viewWork.capture()
-        let imageMain = image.crop(rect: self.imgViewTemp.frame)
-        let imageSave = imageMain.crop(rect: self.imgViewTemp.frameForImageInImageViewAspectFit())
-        UIImageWriteToSavedPhotosAlbum(imageSave, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        //
+        // extract image
+        //
+        var imageSave = imgViewPreview?.image
+        if (imgViewPreview!.isHidden) {
+            imageSave = extractImage()
+        }
+        else {
+            // image from preview flip image horizontally
+            imageSave = imageSave?.withHorizontallyFlippedOrientation()
+        }
+        
+        //
+        // save to pdf
+        //
+        
+        // make 300dpi image
+        let my300dpiImage = UIImage(cgImage: imageSave!.cgImage!, scale: 300.0 / 72.0, orientation: imageSave!.imageOrientation)
+
+        // setup file name
+        let documentDirectories = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentDirectory = documentDirectories[0]
+        let pdfFileNameUrl = NSURL(fileURLWithPath: documentDirectory).appendingPathComponent("mypdf.pdf")
+        let pdfFileName = pdfFileNameUrl?.path
+        
+        // write to pdf
+        UIGraphicsBeginPDFContextToFile(pdfFileName!, CGRect.zero, nil)
+        
+        let nWidth = 72 * 4 // 4 inches
+        let nHeight = 72 * 5 // 4 inches
+        
+        UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: nWidth, height: nHeight), nil);
+        
+        // image height & offset
+        let fImgWidth = CGFloat(nWidth)
+        let fImgHeight = my300dpiImage.size.height / (my300dpiImage.size.width / fImgWidth)
+        let fOffset = (CGFloat(nHeight) - fImgHeight) / 2
+        my300dpiImage.draw(in: CGRect(x: 0, y: fOffset, width: fImgWidth, height: fImgHeight))
+        
+        UIGraphicsEndPDFContext()
+        
+        
+        //
+        // show actionsheet for save or share
+        //
+        let alertController = UIAlertController(title: "Save image", message: "You can save photo as image or Pdf", preferredStyle: .actionSheet)
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        let butImgSave = UIAlertAction(title: "Save into Photos", style: .default, handler: { (action) -> Void in
+            UIImageWriteToSavedPhotosAlbum(my300dpiImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        })
+        
+        let butImgShare = UIAlertAction(title: "Share with PDF", style: .destructive, handler: { (action) -> Void in
+            if let fileData = NSData(contentsOfFile: pdfFileName!) {
+                let activityViewController = UIActivityViewController(activityItems: [fileData], applicationActivities: nil)
+                
+                if let popoverController = activityViewController.popoverPresentationController {
+                    popoverController.sourceView = self.view
+                    popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                    popoverController.permittedArrowDirections = []
+                }
+
+                activityViewController.setValue("Photo from High Res Souvenirs" , forKey: "subject") ;
+                activityViewController.excludedActivityTypes = [
+                    .postToTwitter,
+                    .postToWeibo,
+                    .message,
+                    .markupAsPDF,
+                    .copyToPasteboard,
+                    .assignToContact,
+                    .saveToCameraRoll,
+                    .addToReadingList,
+                    .postToFlickr,
+                    .postToVimeo,
+                    .postToTencentWeibo,
+                    .openInIBooks
+                ]
+                
+                self.present(activityViewController, animated: true, completion: {})
+            }
+        })
+        
+        let butImgCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            print("Cancel button tapped")
+        })
+        
+        alertController.addAction(butImgSave)
+        alertController.addAction(butImgShare)
+        alertController.addAction(butImgCancel)
+        
+        self.navigationController!.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Image
     func setupViews() {
-        if self.firstImageView != nil {
-            return
-        }
         
-        self.firstImageView = {
-            let iv = DraggableImageView()
-            iv.backgroundColor = .white
-            iv.isUserInteractionEnabled = true
-            return iv
-        }()
+        initTemplateImage()
+        
+        if self.firstImageView == nil {
+            self.firstImageView = {
+                let iv = DraggableImageView()
+                iv.isUserInteractionEnabled = true
+                iv.contentMode = .scaleAspectFit
+                return iv
+            }()
+            
+            self.viewWork.insertSubview(self.firstImageView!, at: 1)
+        }
         
         print("\(self.viewWork.frame.minX), \(self.viewWork.frame.minY), \(self.viewWork.frame.maxX), \(self.viewWork.frame.maxY)")
         
-        self.viewWork.insertSubview(self.firstImageView!, at: 0)
+        let originX = template!.rectContent!.origin.x * self.viewWork.frame.size.width
+        let originY = rtImgWorkArea!.origin.y + template!.rectContent!.origin.y * rtImgWorkArea!.height
+        let width = template!.rectContent!.width * self.viewWork.frame.size.width
+        let height = template!.rectContent!.height * rtImgWorkArea!.height
         
-        let firstImageWidth = self.viewWork.frame.size.width / 1.5
-
-        print("\(self.viewWork.frame.midX), \(self.viewWork.frame.midY)")
-        self.firstImageView!.frame = CGRect(x: self.viewWork.frame.width / 2 - firstImageWidth / 2,
-                                            y: self.viewWork.frame.height / 2 - firstImageWidth / 2,
-                                            width: firstImageWidth,
-                                            height: firstImageWidth)
+        self.firstImageView!.frame = CGRect(x: originX,
+                                            y: originY,
+                                            width: width,
+                                            height: height)
+        
+        viewTextSticker?.initView(delegate: self)
     }
     
     // MARK: - Image Picker Process
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        self.firstImageView!.image  = sFunc_imageFixOrientation(img: chosenImage)
-        self.firstImageView!.contentMode = .scaleAspectFill
+        
+        // go to image process page
+        let imageVC = self.storyboard!.instantiateViewController(withIdentifier: "ImageView") as! ImageViewController
+        imageVC.imgMain = chosenImage.normalizedImage()
+        imageVC.delegate = self
+        self.navigationController?.pushViewController(imageVC, animated: true)
+
         dismiss(animated: true, completion: nil)
-        
-        // Make template semi-transparent
-        makeImageTransparent(transparent: true)
-    }
-    
-    func sFunc_imageFixOrientation(img:UIImage) -> UIImage {
-        
-        // No-op if the orientation is already correct
-        if (img.imageOrientation == UIImageOrientation.up) {
-            return img;
-        }
-        // We need to calculate the proper transformation to make the image upright.
-        // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
-        var transform:CGAffineTransform = CGAffineTransform.identity
-        
-        if (img.imageOrientation == UIImageOrientation.down
-            || img.imageOrientation == UIImageOrientation.downMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.width, y: img.size.height)
-            transform = transform.rotated(by: CGFloat.pi)
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.left
-            || img.imageOrientation == UIImageOrientation.leftMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.width, y: 0)
-            transform = transform.rotated(by: CGFloat.pi/2)
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.right
-            || img.imageOrientation == UIImageOrientation.rightMirrored) {
-            
-            transform = transform.translatedBy(x: 0, y: img.size.height);
-            transform = transform.rotated(by: -CGFloat.pi/2);
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.upMirrored
-            || img.imageOrientation == UIImageOrientation.downMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.width, y: 0)
-            transform = transform.scaledBy(x: -1, y: 1)
-        }
-        
-        if (img.imageOrientation == UIImageOrientation.leftMirrored
-            || img.imageOrientation == UIImageOrientation.rightMirrored) {
-            
-            transform = transform.translatedBy(x: img.size.height, y: 0);
-            transform = transform.scaledBy(x: -1, y: 1);
-        }
-        
-        
-        // Now we draw the underlying CGImage into a new context, applying the transform
-        // calculated above.
-        let ctx:CGContext = CGContext(data: nil, width: Int(img.size.width), height: Int(img.size.height),
-                                      bitsPerComponent: img.cgImage!.bitsPerComponent, bytesPerRow: 0,
-                                      space: img.cgImage!.colorSpace!,
-                                      bitmapInfo: img.cgImage!.bitmapInfo.rawValue)!
-        
-        ctx.concatenate(transform)
-        
-        
-        if (img.imageOrientation == UIImageOrientation.left
-            || img.imageOrientation == UIImageOrientation.leftMirrored
-            || img.imageOrientation == UIImageOrientation.right
-            || img.imageOrientation == UIImageOrientation.rightMirrored
-            ) {
-            
-            
-            ctx.draw(img.cgImage!, in: CGRect(x:0,y:0,width:img.size.height,height:img.size.width))
-            
-        } else {
-            ctx.draw(img.cgImage!, in: CGRect(x:0,y:0,width:img.size.width,height:img.size.height))
-        }
-        
-        
-        // And now we just create a new UIImage from the drawing context
-        let cgimg:CGImage = ctx.makeImage()!
-        let imgEnd:UIImage = UIImage(cgImage: cgimg)
-        
-        return imgEnd
     }
     
     // MARK: - Gestures
     
     @IBAction func tap(_ gesture: UITapGestureRecognizer) {
         hideStickerEditFrame()
+        clearTextStickerView()
     }
     
     @IBAction func pan(_ gesture: UIPanGestureRecognizer) {
@@ -315,12 +530,18 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         if firstImageView!.image == nil {
             return false
         }
+        
+        // lock in flipped state
+        if (butFlip.isSelected) {
+            return false
+        }
 
         return true
     }
     
+    //
     // MARK: - UIGestureRecognizerDelegate
-    
+    //
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
@@ -329,13 +550,28 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
         // touched sticker view, cancel this gesture
         if touch.view is CHTStickerView {
             hideStickerEditFrame()
+            clearTextStickerView()
             
             // show edit frame
             let stickerView = touch.view as! CHTStickerView
             stickerView.showEditingHandlers = true
             
+            currentStickerView = stickerView
+            
+            // init edit view for text sticker
+            if stickerView.contentView is UILabel {
+                let viewLabel = stickerView.contentView as! UILabel
+                viewTextSticker?.initTextSizeColor(text: viewLabel.text!,
+                                                   size: Int(viewLabel.font.pointSize),
+                                                   color: viewLabel.textColor)
+            }
+            
             return false
         }
+        
+        // close the keyboard
+        self.view.endEditing(true)
+        
         // touched unnecessary view, cancel this gesture
         if touch.view!.isDescendant(of: self.panelView) {
             return false
@@ -364,12 +600,15 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
     func makeImageTransparent(transparent: Bool) {
         if (transparent) {
             self.imgViewTemp.alpha = 0.5
+            viewTopMask!.alpha = 0.5
+            viewBottomMask!.alpha = 0.5
         }
         else {
             self.imgViewTemp.alpha = 1
+            viewTopMask!.alpha = 1
+            viewBottomMask!.alpha = 1
         }
     }
-
     
     /// Remove edit frame for stickers
     func hideStickerEditFrame() {
@@ -377,6 +616,20 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             if (view is CHTStickerView) {
                 let stickerView = view as! CHTStickerView
                 stickerView.showEditingHandlers = false
+            }
+        }
+        
+        currentStickerView = nil
+    }
+    
+    /// enable stickers
+    ///
+    /// - Parameter enable: <#enable description#>
+    func enableStickers(enable: Bool) {
+        for view in self.viewWork.subviews {
+            if (view is CHTStickerView) {
+                let stickerView = view as! CHTStickerView
+                stickerView.isUserInteractionEnabled = enable
             }
         }
     }
@@ -392,6 +645,61 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, UIImage
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         }
+    }
+
+    //
+    // MARK: - HumanImageDelegate
+    //
+    func setImageExtracted(img: UIImage) {
+        self.firstImageView!.image  = img
+        self.firstImageView!.contentMode = .scaleAspectFill
+
+        // Make template semi-transparent
+//        makeImageTransparent(transparent: true)
+    }
+    
+    func getCurrentStickerLabel() -> UILabel? {
+        if currentStickerView == nil {
+            return nil
+        }
+        
+        return currentStickerView!.contentView as? UILabel
+    }
+    
+    //
+    // MARK: - TextStickerViewDelegate
+    //
+    func updatedTextColor(color: UIColor) {
+        let stickerLabel = getCurrentStickerLabel()
+        stickerLabel?.textColor = color
+        
+        stickerTextColor = color
+    }
+    
+    func updatedTextSize(size: Int) {
+        let stickerLabel = getCurrentStickerLabel()
+        stickerLabel?.font = UIFont(name: "Helvetica Bold", size: CGFloat(size))
+        
+        stickerTextSize = size
+    }
+    
+    //
+    // MARK: - UITextViewDelegate
+    //
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            textView.resignFirstResponder()
+    
+            if getCurrentStickerLabel() == nil {
+                addTextSticker(text: textView.text)
+            }
+            else {
+                // update text
+                let stickerLabel = getCurrentStickerLabel()
+                stickerLabel?.text = textView.text
+            }
+        }
+        return true
     }
     
 }

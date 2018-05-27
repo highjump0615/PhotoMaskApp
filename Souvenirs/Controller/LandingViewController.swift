@@ -20,15 +20,32 @@ class LandingViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.mLblTitle.adjustsFontSizeToFitWidth = true
         
-        // check acvitation status
-        let deviceId = UIDevice.current.identifierForVendor?.uuidString
+        // load activate flag
+        let defaluts = UserDefaults.standard
+        let bActivated = defaluts.bool(forKey: Common.KEY_ACTIVATION)
         
-        let userInfo = User.ref.child(User.TableName).child(deviceId!).queryLimited(toFirst: 1)
-        userInfo.observe(.value) { snapshot in
-            if snapshot.childrenCount > 0 {
-                self.butStart.isEnabled = true
+        if bActivated {
+            self.enableStart()
+        }
+        else {
+            // check acvitation status
+            let deviceId = UIDevice.current.identifierForVendor?.uuidString
+            
+            let userInfo = User.ref.child(User.TableName).child(deviceId!).queryLimited(toFirst: 1)
+            userInfo.observe(.value) { snapshot in
+                if snapshot.childrenCount > 0 {
+                    self.enableStart()
+                    
+                    // save activate flag
+                    let defaluts = UserDefaults.standard
+                    defaluts.set(true, forKey: Common.KEY_ACTIVATION)
+                }
             }
         }
+    }
+    
+    func enableStart() {
+        self.butStart.isEnabled = true
     }
 
     override func didReceiveMemoryWarning() {
