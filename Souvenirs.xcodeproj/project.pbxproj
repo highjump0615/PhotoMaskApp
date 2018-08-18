@@ -91,6 +91,10 @@
 		C350C33420A39C100066F4F3 /* vrasta_high_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */; };
 		C350C33520A39C100066F4F3 /* vrasta_high_front.png in Resources */ = {isa = PBXBuildFile; fileRef = C350C33320A39C100066F4F3 /* vrasta_high_front.png */; };
 		C350C33720A3A3BD0066F4F3 /* vrasta_high_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */; };
+		C351F71C20DA366800B4DD49 /* chalice2_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C351F71820DA366800B4DD49 /* chalice2_bg.png */; };
+		C351F71D20DA366800B4DD49 /* chalice4_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C351F71920DA366800B4DD49 /* chalice4_bg.png */; };
+		C351F71E20DA366800B4DD49 /* chalice1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C351F71A20DA366800B4DD49 /* chalice1_bg.png */; };
+		C351F71F20DA366800B4DD49 /* chalice3_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C351F71B20DA366800B4DD49 /* chalice3_bg.png */; };
 		C352F5A32077F09B0014714B /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A22077F09A0014714B /* opencv2.framework */; };
 		C352F5A52077FD850014714B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A42077FD850014714B /* Accelerate.framework */; };
 		C352F5A72077FD920014714B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C352F5A62077FD910014714B /* AssetsLibrary.framework */; };
@@ -251,6 +255,10 @@
 		C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vrasta_high_bg.jpg; sourceTree = "<group>"; };
 		C350C33320A39C100066F4F3 /* vrasta_high_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vrasta_high_front.png; sourceTree = "<group>"; };
 		C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vrasta_high_thumb.png; sourceTree = "<group>"; };
+		C351F71820DA366800B4DD49 /* chalice2_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chalice2_bg.png; sourceTree = "<group>"; };
+		C351F71920DA366800B4DD49 /* chalice4_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chalice4_bg.png; sourceTree = "<group>"; };
+		C351F71A20DA366800B4DD49 /* chalice1_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chalice1_bg.png; sourceTree = "<group>"; };
+		C351F71B20DA366800B4DD49 /* chalice3_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chalice3_bg.png; sourceTree = "<group>"; };
 		C352F5A02077F07C0014714B /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Framework; sourceTree = "<group>"; };
 		C352F5A22077F09A0014714B /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = Framework/opencv2.framework; sourceTree = "<group>"; };
 		C352F5A42077FD850014714B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -550,6 +558,10 @@
 		C329A5B120245FF9006CE55B /* Template */ = {
 			isa = PBXGroup;
 			children = (
+				C351F71A20DA366800B4DD49 /* chalice1_bg.png */,
+				C351F71820DA366800B4DD49 /* chalice2_bg.png */,
+				C351F71B20DA366800B4DD49 /* chalice3_bg.png */,
+				C351F71920DA366800B4DD49 /* chalice4_bg.png */,
 				C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */,
 				C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */,
 				C350C33320A39C100066F4F3 /* vrasta_high_front.png */,
@@ -882,9 +894,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C351F71F20DA366800B4DD49 /* chalice3_bg.png in Resources */,
 				C303021020263852007079AC /* Mustasch7.png in Resources */,
 				C303020920263852007079AC /* Mustasch0.png in Resources */,
 				C30301EB20263851007079AC /* AFRO2.png in Resources */,
+				C351F71D20DA366800B4DD49 /* chalice4_bg.png in Resources */,
 				C303020720263852007079AC /* Glass8.png in Resources */,
 				C303021820263852007079AC /* Swag15.png in Resources */,
 				C352F5DD207809FC0014714B /* 1_Step_1_3.dat in Resources */,
@@ -936,6 +950,7 @@
 				C30301EE20263851007079AC /* BEARD1.png in Resources */,
 				C346D72420230D4B00AACFED /* Main.storyboard in Resources */,
 				C352F5E8207809FC0014714B /* 2_Step_2_2.dat in Resources */,
+				C351F71E20DA366800B4DD49 /* chalice1_bg.png in Resources */,
 				C303020420263852007079AC /* Glass5.png in Resources */,
 				C3381673203B6ADF00490E7A /* wanted_bg.png in Resources */,
 				C352F5EE207809FC0014714B /* rcpr_38_pn_4_flt_10.mem in Resources */,
@@ -962,6 +977,7 @@
 				C30301FA20263851007079AC /* Glass11.png in Resources */,
 				C30301EC20263851007079AC /* AFRO3.png in Resources */,
 				C303021720263852007079AC /* Swag14.png in Resources */,
+				C351F71C20DA366800B4DD49 /* chalice2_bg.png in Resources */,
 				C30301F920263851007079AC /* Glass10.png in Resources */,
 				C30301EA20263851007079AC /* AFRO1.png in Resources */,
 				C352F5F0207809FC0014714B /* rcpr_38_pn_4_sh_8.mem in Resources */,
