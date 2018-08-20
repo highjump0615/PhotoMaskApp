@@ -53,27 +53,28 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
         template = Template(name: "Los Angeles 1")
         template.imgPathBackground = "losag_bg.png"
         template.imgPathThumb = "losag_thumb.png"
-        template.rectContent = CGRect(x: 467 / 2971.0,
-                                      y: 1306 / 4309.0,
-                                      width: 2061 / 2971.0,
-                                      height: 2071 / 4309.0)
+        template.rectContent = CGRect(x: 271 / 1200.0,
+                                      y: 346 / 1200.0,
+                                      width: 665 / 1200.0,
+                                      height: 665 / 1200.0)
         self.templates.append(template)
         
         template = Template(name: "Los Angeles 2")
         template.imgPathBackground = "losfa_bg.png"
         template.imgPathThumb = "losfa_thumb.png"
-        template.rectContent = CGRect(x: 467 / 2971.0,
-                                      y: 1306 / 4309.0,
-                                      width: 2061 / 2971.0,
-                                      height: 2071 / 4309.0)
+        template.rectContent = CGRect(x: 271 / 1200.0,
+                                      y: 346 / 1200.0,
+                                      width: 665 / 1200.0,
+                                      height: 665 / 1200.0)
         self.templates.append(template)
         
         template = Template(name: "Smoking")
         template.imgPathBackground = "wanted_bg"
-        template.rectContent = CGRect(x: 124 / 612.0,
-                                      y: 237 / 792.0,
-                                      width: 367 / 612.0,
-                                      height: 367 / 792.0)
+        template.imgPathThumb = "wanted_thumb"
+        template.rectContent = CGRect(x: 256 / 1200.0,
+                                      y: 292 / 1200.0,
+                                      width: 682 / 1200.0,
+                                      height: 682 / 1200.0)
         self.templates.append(template)
         
         template = Template(name: "Venis Rasta")
