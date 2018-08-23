@@ -85,39 +85,7 @@ class SelectViewController: UIViewController, UICollectionViewDelegate, UICollec
                                       y: 67 / 250.0,
                                       width: 131 / 300.0,
                                       height: 131 / 250.0)
-        self.templates.append(template)
-        
-        template = Template(name: "Chalice 1")
-        template.imgPathBackground = "chalice1_bg"
-        template.rectContent = CGRect(x: 500 / 3000.0,
-                                      y: 576 / 3000.0,
-                                      width: 2040 / 3000.0,
-                                      height: 1784 / 3000.0)
-        self.templates.append(template)
-        
-        template = Template(name: "Chalice 2")
-        template.imgPathBackground = "chalice2_bg"
-        template.rectContent = CGRect(x: 636 / 3000.0,
-                                      y: 592 / 3000.0,
-                                      width: 1944 / 3000.0,
-                                      height: 1960 / 3000.0)
-        self.templates.append(template)
-        
-        template = Template(name: "Chalice 3")
-        template.imgPathBackground = "chalice3_bg"
-        template.rectContent = CGRect(x: 376 / 3000.0,
-                                      y: 430 / 3000.0,
-                                      width: 2250 / 3000.0,
-                                      height: 2140 / 3000.0)
-        self.templates.append(template)
-        
-        template = Template(name: "Chalice 4")
-        template.imgPathBackground = "chalice4_bg"
-        template.rectContent = CGRect(x: 536 / 3000.0,
-                                      y: 532 / 3000.0,
-                                      width: 2040 / 3000.0,
-                                      height: 1992 / 3000.0)
-        self.templates.append(template)
+        self.templates.append(template)        
     }
 
     override func didReceiveMemoryWarning() {
