@@ -8,9 +8,11 @@ Photo Mask iOS App
 ### 1. Main Features
 - Photo masking with template images  
 - Adding Stickers to image
+- Extract human face from any photo or image
 - Save image to disk
  
-### 2. Techniques (Swift 4.0)
+### 2. Techniques  
+Main language: Swift 4.0
 #### 2.1 UI Implementation
 - Variable font size on different screen  
 Different font size based on size classes  
@@ -46,11 +48,31 @@ func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive t
 ```
 - Implemented Activation logic with Firebase  
 UUID is the key for each phone, added some more user info on that key  
+- Hand-drawing for marking face area  
+  - Drawing as image using Image Context with touched points  
+``UIGraphicsBeginImageContext()``  
+``UIGraphicsGetImageFromCurrentImageContext()``  
+``UIGraphicsEndImageContext()``  
+- Save/Load data to UserDefaults  
+  - Activation flag for determining status when opens app  
+- Face extrating module  
+``./Lib/imagemat``  
+  - Using [SSE2NEON.h](https://github.com/jratcliff63367/sse2neon) for ARM Architecture (iOS devices, not simulator)  
 
 #### 2.2.3 Third-Party Libraries
 - [CHTStickerView](https://github.com/chiahsien/CHTStickerView)  
 Adding stickers on main image
 - [SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD)  
+- [IHKeyboardAvoiding](https://github.com/IdleHandsApps/IHKeyboardAvoiding) v4.2  
+  - Activation page  
+- [KMPlaceholderTextView](https://github.com/MoZhouqi/KMPlaceholderTextView) v1.3.0  
+- [ChromaColorPicker](https://github.com/joncardasis/ChromaColorPicker) v1.5  
+  - Selecting colors for Text Sticker  
+- [KMPlaceholderTextView](https://github.com/MoZhouqi/KMPlaceholderTextView) v1.3.0  
+- [Google Firebase](https://github.com/firebase/firebase-ios-sdk) v4.9.0  
+  - Firebase Database  
+- [OpenCV](https://opencv.org/releases.html) v3.4.1  
+  - Extracting face
 
 ## Need to Improve
-- Extracting human shape from photo and applying to template
+- Improve face extraction speed, etc

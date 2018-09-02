@@ -86,6 +86,7 @@
 		C3381675203B6ADF00490E7A /* losfa_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C3381670203B6ADF00490E7A /* losfa_bg.png */; };
 		C3381676203B6ADF00490E7A /* losag_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C3381671203B6ADF00490E7A /* losag_thumb.png */; };
 		C3448C96207780D200DDC0F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3448C95207780D200DDC0F5 /* CoreGraphics.framework */; };
+		C34596522128A2B10078556C /* wanted_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = C34596512128A2B10078556C /* wanted_thumb.png */; };
 		C346D72320230D4B00AACFED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D71F20230D4A00AACFED /* LaunchScreen.storyboard */; };
 		C346D72420230D4B00AACFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C346D72120230D4A00AACFED /* Main.storyboard */; };
 		C350C33420A39C100066F4F3 /* vrasta_high_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */; };
@@ -245,6 +246,7 @@
 		C3381671203B6ADF00490E7A /* losag_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = losag_thumb.png; sourceTree = "<group>"; };
 		C3448C8520777D0200DDC0F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C3448C95207780D200DDC0F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C34596512128A2B10078556C /* wanted_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wanted_thumb.png; sourceTree = "<group>"; };
 		C346D72020230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C346D72220230D4A00AACFED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C34F2B9120799E3300443B66 /* SSE2NEON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSE2NEON.h; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		C329A5B120245FF9006CE55B /* Template */ = {
 			isa = PBXGroup;
 			children = (
+				C34596512128A2B10078556C /* wanted_thumb.png */,
 				C350C33620A3A3BD0066F4F3 /* vrasta_high_thumb.png */,
 				C350C33220A39C100066F4F3 /* vrasta_high_bg.jpg */,
 				C350C33320A39C100066F4F3 /* vrasta_high_front.png */,
@@ -920,6 +923,7 @@
 				C30301FE20263852007079AC /* Glass15.png in Resources */,
 				C352F5DC207809FC0014714B /* 1_Step_1_2.dat in Resources */,
 				C3733DFF2038058600398C6C /* GoogleService-Info.plist in Resources */,
+				C34596522128A2B10078556C /* wanted_thumb.png in Resources */,
 				C352F5ED207809FC0014714B /* rcpr_38_pflt_18.mem in Resources */,
 				C303021420263852007079AC /* Swag11.jpg in Resources */,
 				C303022020263852007079AC /* Swag9.png in Resources */,
